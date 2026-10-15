@@ -13,8 +13,7 @@
 [![GitHub Release](https://shieldcn.dev/github/release/varunaditya-plus/SleekFin.svg?size=sm)](https://github.com/varunaditya-plus/SleekFin/releases/latest)
 ![Please star this repo](https://shieldcn.dev/badge/★%20please%20star-22c55e.svg?theme=amber&color=eab308&size=sm&variant=outline)
 
-The ultimate customisation plugin for Jellyfin, which fully reskins Jellyfin to give it a modern, refreshed look. This plugin is like a superpowered theme, with precise customisation, letting you tweak the plugin as you'd like.
-
+The ultimate customisation plugin for Jellyfin, which fully reskins Jellyfin to give it a modern, refreshed look. This plugin is like a superpowered theme, with precise 
 </div>
 
 <!-- <div align="center" style="width:100%;">
