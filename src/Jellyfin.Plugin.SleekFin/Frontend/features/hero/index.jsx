@@ -38,16 +38,34 @@ function prepareLoading() {
 }
 
 function isHomeRoute() {
-  const match = window.location.hash.match(/^#\/(?:home)?(?:\?([^#]*))?$/);
-  if (!match) return false;
-
-  const tab = new URLSearchParams(match[1] || '').get('tab');
+  const rawHash = (window.location.hash || '').replace(/^#\/?/, '');
+  const path = rawHash.split('?')[0].toLowerCase();
+  if (path !== '' && path !== 'home' && path !== 'home.html' && path !== 'index.html') {
+    return false;
+  }
+  const queryIndex = window.location.hash.indexOf('?');
+  const params = queryIndex >= 0 ? new URLSearchParams(window.location.hash.slice(queryIndex)) : null;
+  const tab = params?.get('tab');
   return !tab || tab === '0';
 }
 
 function findHost() {
   if (!isHomeRoute()) return null;
-  return Array.from(document.querySelectorAll('#indexPage #homeTab.is-active .sections')).find(dom.isVisible) || null;
+  const selectors = [
+    '#indexPage #homeTab.is-active .sections',
+    '#indexPage #homeTab .sections',
+    '#indexPage:not(.hide) .sections',
+    '#indexPage .sections',
+    '#homeTab .sections',
+    '#indexPage .homeSectionsContainer',
+    '.sections.homeSectionsContainer',
+    '.homeSectionsContainer',
+  ];
+  for (let i = 0; i < selectors.length; i++) {
+    const el = Array.from(document.querySelectorAll(selectors[i])).find(dom.isVisible);
+    if (el) return el;
+  }
+  return null;
 }
 
 function removeMount() {

@@ -113,7 +113,7 @@ html.sleekfin-main-ui #je-active-streams-panel .je-as-badge {
 }
 
 html.sleekfin-main-ui #je-active-streams-panel .je-as-state-playing {
-    background: rgba(220, 38, 38, 0.18);
+    background: rgba(245, 245, 247, 0.18);
     color: var(--jf-palette-primary-light);
 }
 
@@ -142,7 +142,7 @@ html.sleekfin-main-ui #je-active-streams-panel .je-as-badge-neutral {
 }
 
 html.sleekfin-main-ui #je-active-streams-panel .je-as-badge-reason {
-    background: rgba(220, 38, 38, 0.13);
+    background: rgba(245, 245, 247, 0.13);
     color: var(--jf-palette-primary-light);
 }
 

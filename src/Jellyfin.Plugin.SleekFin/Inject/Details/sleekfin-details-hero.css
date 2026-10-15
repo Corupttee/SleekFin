@@ -1,8 +1,13 @@
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBackdrop {
+html.sleekfin-details-mounted #itemDetailPage #itemBackdrop,
+html.sleekfin-details-mounted #itemDetailPage .itemBackdrop,
+html.sleekfin-details-mounted .layout-desktop .itemBackdrop,
+html.sleekfin-details-mounted .layout-tv .itemBackdrop,
+html.sleekfin-details-mounted .itemBackdrop {
     background-attachment: scroll !important;
-    background-position: center 24% !important;
+    background-position: center 20% !important;
     background-size: cover !important;
-    height: var(--sleekfin-details-hero-height) !important;
+    height: var(--sleekfin-details-hero-height, 75vh) !important;
+    min-height: 520px !important;
     inset: 0 0 auto !important;
     margin: 0 !important;
     opacity: 1 !important;
@@ -12,8 +17,27 @@ html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBack
     z-index: 0;
 }
 
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBackdrop::before,
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBackdrop::after {
+html.sleekfin-details-mounted #itemDetailPage .detailLogo {
+    margin-left: 0 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    height: 110px !important;
+    background-position: left bottom !important;
+    filter: drop-shadow(0 3px 14px rgba(0, 0, 0, 0.45)) !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage .detailRibbon,
+html.sleekfin-details-mounted #itemDetailPage .detailPagePrimaryContent,
+html.sleekfin-details-mounted #itemDetailPage .detailPageContent,
+html.sleekfin-details-mounted #itemDetailPage .detailPageSecondaryContainer {
+    padding-left: 0 !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::after,
+#itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
+#itemDetailPage[data-sleekfin-details] #itemBackdrop::after {
     content: "";
     inset: 0;
     pointer-events: none;
@@ -21,11 +45,13 @@ html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBack
     z-index: 1;
 }
 
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBackdrop::before {
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
+#itemDetailPage[data-sleekfin-details] #itemBackdrop::before {
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.84) 0%, rgba(0, 0, 0, 0.56) 20%, rgba(0, 0, 0, 0.25) 42%, transparent 68%);
 }
 
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBackdrop::after {
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::after,
+#itemDetailPage[data-sleekfin-details] #itemBackdrop::after {
     background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.14) 64%, rgba(0, 0, 0, 0.55) 82%, var(--sleekfin-background) 100%);
 }
 
@@ -132,7 +158,7 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
     flex-direction: column;
     justify-content: flex-end;
     min-height: 96px;
-    max-width: 340px;
+    max-width: 580px;
     width: 70vw;
 }
 
@@ -142,10 +168,10 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
     background-size: contain !important;
     display: block !important;
     filter: drop-shadow(0 3px 14px rgba(0, 0, 0, 0.45));
-    height: 96px !important;
+    height: 110px !important;
     inset: auto !important;
     margin: 0 !important;
-    max-width: none !important;
+    max-width: 520px !important;
     opacity: 1 !important;
     position: static !important;
     width: 100% !important;
@@ -163,9 +189,13 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
     min-width: 0;
 }
 
-.sleekfin-details-hero.sleekfin-details-has-logo .sleekfin-details-title .nameContainer > :not(.originalTitle),
+.sleekfin-details-hero.sleekfin-details-has-logo .sleekfin-details-title .nameContainer,
+.sleekfin-details-hero.sleekfin-details-has-logo .nameContainer h1,
+.sleekfin-details-hero.sleekfin-details-has-logo .nameContainer .itemName,
+.sleekfin-details-hero.sleekfin-details-has-logo .nameContainer .parentName,
+.sleekfin-details-hero.sleekfin-details-has-logo .nameContainer > :not(.originalTitle),
 .sleekfin-details-has-child-title:not(.sleekfin-details-has-logo) .sleekfin-details-title {
-    display: none;
+    display: none !important;
 }
 
 .sleekfin-details-title :is(h1, .parentName) {
@@ -241,7 +271,7 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
 }
 
 .sleekfin-details-score .sleekfin-icon {
-    color: var(--sleekfin-accent);
+    color: #f5c518;
 }
 
 .sleekfin-details-certification {
@@ -287,9 +317,9 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
     color: rgba(255, 255, 255, 0.88) !important;
     cursor: pointer;
     display: -webkit-box;
-    font: 400 14px/1.45 var(--sleekfin-font-family);
+    font: 400 14.5px/1.55 var(--sleekfin-font-family);
     margin: 12px 0 0 !important;
-    max-width: 520px;
+    max-width: 680px;
     overflow: hidden;
 }
 

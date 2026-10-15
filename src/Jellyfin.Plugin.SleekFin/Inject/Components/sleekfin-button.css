@@ -27,6 +27,10 @@
     gap: inherit;
 }
 
+.sleekfin-button-content > :not(.sleekfin-icon):not(.sleekfin-button-label) {
+    display: none !important;
+}
+
 .sleekfin-button-primary {
     background: var(--sleekfin-text) !important;
     border: 0 !important;

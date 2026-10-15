@@ -1,17 +1,12 @@
 .sleekfin-section-heading {
     align-items: flex-start;
     display: flex;
-    gap: 10px;
+    gap: 0;
     min-width: 0;
 }
 
 .sleekfin-section-rail {
-    align-self: stretch;
-    background: var(--sleekfin-accent);
-    border-radius: 999px;
-    flex: 0 0 3px;
-    margin-top: 2px;
-    min-height: 1.15em;
+    display: none !important;
 }
 
 .sleekfin-section-copy {

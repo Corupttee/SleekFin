@@ -33,7 +33,7 @@ html.sleekfin-main-ui :is(.emby-input, .emby-textarea, .emby-select) {
 
 html.sleekfin-main-ui :is(.emby-input:focus, .emby-textarea:focus, .emby-select:focus) {
     border-color: var(--sleekfin-accent) !important;
-    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 html.sleekfin-main-ui .checkboxOutline {

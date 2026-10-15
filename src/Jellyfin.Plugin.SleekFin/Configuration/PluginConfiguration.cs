@@ -4,7 +4,7 @@ namespace Jellyfin.Plugin.SleekFin.Configuration;
 
 public sealed class PluginConfiguration : BasePluginConfiguration
 {
-    public const string DefaultAccentColor = "#dc2626";
+    public const string DefaultAccentColor = "#f5f5f7";
     public const string DefaultDropdownStyle = "Jellyfin";
 
     private string _accentColor = DefaultAccentColor;
@@ -16,13 +16,18 @@ public sealed class PluginConfiguration : BasePluginConfiguration
         set
         {
             string color = value?.Trim() ?? string.Empty;
+            if (string.Equals(color, "#dc2626", StringComparison.OrdinalIgnoreCase))
+            {
+                _accentColor = DefaultAccentColor;
+                return;
+            }
             _accentColor = color.Length == 7 && color[0] == '#' && color.Skip(1).All(char.IsAsciiHexDigit)
                 ? color.ToLowerInvariant()
                 : DefaultAccentColor;
         }
     }
 
-    public bool HeaderEnabled { get; set; } = true;
+    public bool HeaderEnabled { get; set; } = false;
 
     public string HeaderItemOrder { get; set; } = string.Empty;
 

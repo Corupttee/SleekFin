@@ -5,6 +5,7 @@ public static class FrontendAssets
     public enum Feature
     {
         Always,
+        Header,
         Hero,
         Details,
         Abyss
@@ -31,10 +32,10 @@ public static class FrontendAssets
         new("sleekfin-section-heading.css", "Components"),
         new("sleekfin-fact.css", "Components"),
         new("sleekfin-meta.css", "Components"),
-        new("sleekfin-header-shared.css", "Header"),
-        new("sleekfin-header-brand.css", "Header"),
-        new("sleekfin-header-modern.css", "Header"),
-        new("sleekfin-header-legacy.css", "Header"),
+        new("sleekfin-header-shared.css", "Header", Feature.Header),
+        new("sleekfin-header-brand.css", "Header", Feature.Header),
+        new("sleekfin-header-modern.css", "Header", Feature.Header),
+        new("sleekfin-header-legacy.css", "Header", Feature.Header),
         new("sleekfin-je-components.css", "JellyfinEnhanced"),
         new("sleekfin-je-active-streams.css", "JellyfinEnhanced"),
         new("sleekfin-hero.css", "Hero", Feature.Hero),
@@ -54,7 +55,7 @@ public static class FrontendAssets
         new("sleekfin-details-boot.js", "Details", Feature.Details, IsBlockingScript: true),
         new("sleekfin-runtime.js", "Build"),
         new("sleekfin-theme.js", "Build"),
-        new("sleekfin-header.js", "Build"),
+        new("sleekfin-header.js", "Build", Feature.Header),
         new("sleekfin-hero.js", "Build", Feature.Hero),
         new("sleekfin-media.js", "Build"),
         new("sleekfin-details.js", "Build", Feature.Details)

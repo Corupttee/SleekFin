@@ -1,4 +1,4 @@
-﻿/* Abyss by AumGupta - MIT License - https://github.com/AumGupta/abyss-jellyfin (bundled by SleekFin) */
+/* Abyss by AumGupta - MIT License - https://github.com/AumGupta/abyss-jellyfin (bundled by SleekFin) */
 /* 1. IMPORTS & FONTS
    - Override this to customise font of abyss for your setup. */
 
@@ -333,7 +333,7 @@ input[type="radio"]:checked {
 }
 
 .starIcon {
-    color: rgba(var(--abyss-accent), .8);
+    color: #f5c518 !important;
 }
 
 .dialog {
@@ -887,7 +887,8 @@ html.abyss-spotlight-visible[data-theme="dark"] .MuiAppBar-root+div[aria-hidden=
 /* Backdrop / detail ribbon */
 .layout-tv .itemBackdrop,
 .layout-desktop .itemBackdrop {
-    height: 20vh !important;
+    min-height: 520px !important;
+    height: var(--sleekfin-details-hero-height, 75vh) !important;
     display: inherit;
 }
 
@@ -905,7 +906,7 @@ html.abyss-spotlight-visible[data-theme="dark"] .MuiAppBar-root+div[aria-hidden=
 
 #itemDetailPage .detailLogo {
     position: static;
-    margin-left: 32.5%;
+    margin-left: 0 !important;
     display: block;
     filter: drop-shadow(0 0 10px rgba(2, 2, 2, 0.75));
     -webkit-filter: drop-shadow(0 0 10px rgba(2, 2, 2, 0.75));
@@ -2280,9 +2281,9 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
 }
 
 .layout-mobile .detailLogo {
-    margin-top: -15vh;
+    margin-top: 0;
     margin-bottom: 4vh !important;
-    margin-left: 40vw !important;
+    margin-left: 0 !important;
     width: 50vw !important;
 }
 
@@ -2409,28 +2410,14 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     padding: .4em 1.4em .4em 1em !important;
 }
 
-.layout-desktop #itemDetailPage .btnPlay .detailButton-content::after,
-.layout-tv #itemDetailPage .btnPlay .detailButton-content::after {
-    content: "Play";
-    margin-left: 0.45em;
-    font-weight: 700;
-    font-size: 0.9em;
-}
-
-.layout-desktop #itemDetailPage:has(.btnReplay:not(.hide)) .btnPlay .detailButton-content::after,
-.layout-tv #itemDetailPage:has(.btnReplay:not(.hide)) .btnPlay .detailButton-content::after {
-    content: "Resume";
-}
-
 .layout-tv .detailImageContainer .card,
 .layout-desktop .detailImageContainer .card {
-    position: fixed !important;
-    top: 15% !important;
+    position: relative !important;
 }
 
 .layout-tv .detailPageSecondaryContainer.padded-left,
 .layout-desktop .detailPageSecondaryContainer.padded-left {
-    padding-left: max(env(safe-area-inset-left), 32.45vw);
+    padding-left: 0 !important;
 }
 
 
@@ -2485,7 +2472,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
 /* Tablets (mobile layout): clear the absolutely positioned detail image (left 5% + max-width 30vw) */
 @media screen and (min-width: 768px) {
     .layout-mobile .detailRibbon {
-        padding-left: calc(35vw + 1.5rem) !important;
+        padding-left: 0 !important;
     }
 
     .layout-mobile #itemDetailPage .itemName.originalTitle {
@@ -2608,39 +2595,11 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     .detailImageContainer .card {
         width: 21vw !important;
     }
-
-    .detailRibbon {
-        padding-left: 28.45vw !important;
-    }
-
-    .detailPagePrimaryContent,
-    .layout-tv .detailPageSecondaryContainer.padded-left,
-    .layout-desktop .detailPageSecondaryContainer.padded-left {
-        padding-left: 28.45vw !important;
-    }
-
-    .detailPageContent {
-        padding-left: 28.45vw !important;
-    }
 }
 
 @media (min-aspect-ratio: 2.7/1) {
     .detailImageContainer .card {
         width: 16vw !important;
-    }
-
-    .detailRibbon {
-        padding-left: 23.45vw !important;
-    }
-
-    .detailPagePrimaryContent,
-    .layout-tv .detailPageSecondaryContainer.padded-left,
-    .layout-desktop .detailPageSecondaryContainer.padded-left {
-        padding-left: 23.45vw !important;
-    }
-
-    .detailPageContent {
-        padding-left: 23.45vw !important;
     }
 }
 

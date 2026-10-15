@@ -7,7 +7,7 @@ export function loadSettings(client) {
     type: 'GET',
     url: client.getUrl('SleekFin/Hero/Settings'),
     dataType: 'json',
-  }).then(normalizeSettings);
+  }).then(normalizeSettings).catch(() => normalizeSettings({ enabled: true }));
 }
 
 function itemQuery(client, options) {
@@ -57,6 +57,8 @@ function loadSource(client, source) {
         SortBy: 'SortName',
         SortOrder: 'Ascending',
       });
+    default:
+      return Promise.resolve([]);
   }
 }
 
