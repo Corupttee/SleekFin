@@ -1,6 +1,6 @@
 import { normalizeSettings } from './settings.js';
 
-const ITEM_FIELDS = 'Overview,Genres';
+const ITEM_FIELDS = 'Overview,Genres,DateCreated,ProductionYear,PremiereDate,CommunityRating,OfficialRating,RunTimeTicks,ChildCount,Taglines';
 
 export function loadSettings(client) {
   return client.ajax({
@@ -14,49 +14,75 @@ function itemQuery(client, options) {
   const query = Object.assign({}, options, {
     EnableTotalRecordCount: false,
     Fields: ITEM_FIELDS,
+    ImageTypeLimit: 1,
     Limit: 10,
     Recursive: true,
   });
   return client.getItems(client.getCurrentUserId(), query).then((result) => result.Items || []);
 }
 
+export function currentLibraryScope() {
+  const hash = window.location.hash || '';
+  const queryIndex = hash.indexOf('?');
+  const params = queryIndex >= 0 ? new URLSearchParams(hash.slice(queryIndex)) : new URLSearchParams();
+  const topParentId = params.get('topParentId') || params.get('parentId') || params.get('id') || '';
+  const path = hash.replace(/^#\/?/, '').split('?')[0].toLowerCase();
+  if (path.includes('movies')) return { kind: 'movies', topParentId };
+  if (path.includes('tv') || path.includes('shows') || path.includes('series')) return { kind: 'series', topParentId };
+  return { kind: 'home', topParentId };
+}
+
+function scopedQuery(client, base) {
+  const scope = currentLibraryScope();
+  const query = Object.assign({}, base);
+  if (scope.topParentId) query.ParentId = scope.topParentId;
+  if (scope.kind === 'movies' && !query.IncludeItemTypes) query.IncludeItemTypes = 'Movie';
+  if (scope.kind === 'series' && !query.IncludeItemTypes) query.IncludeItemTypes = 'Series,Episode';
+  return query;
+}
+
 function loadSource(client, source) {
+  const scope = currentLibraryScope();
   switch (source) {
     case 'ContinueWatching':
-      return itemQuery(client, {
+      return itemQuery(client, scopedQuery(client, {
         Filters: 'IsResumable',
-        IncludeItemTypes: 'Movie,Episode',
+        IncludeItemTypes: scope.kind === 'movies' ? 'Movie' : scope.kind === 'series' ? 'Episode' : 'Movie,Episode',
         SortBy: 'DatePlayed',
         SortOrder: 'Descending',
-      });
+      }));
     case 'NextUp':
+      if (scope.kind === 'movies') return Promise.resolve([]);
       return client
         .getNextUpEpisodes({
           EnableTotalRecordCount: false,
           Fields: ITEM_FIELDS,
           Limit: 10,
+          ParentId: scope.topParentId || undefined,
           UserId: client.getCurrentUserId(),
         })
         .then((result) => result.Items || []);
     case 'LatestMovies':
-      return itemQuery(client, {
+      if (scope.kind === 'series') return Promise.resolve([]);
+      return itemQuery(client, scopedQuery(client, {
         IncludeItemTypes: 'Movie',
         SortBy: 'DateCreated',
         SortOrder: 'Descending',
-      });
+      }));
     case 'LatestShows':
-      return itemQuery(client, {
+      if (scope.kind === 'movies') return Promise.resolve([]);
+      return itemQuery(client, scopedQuery(client, {
         IncludeItemTypes: 'Series',
         SortBy: 'DateCreated',
         SortOrder: 'Descending',
-      });
+      }));
     case 'Favorites':
-      return itemQuery(client, {
+      return itemQuery(client, scopedQuery(client, {
         Filters: 'IsFavorite',
-        IncludeItemTypes: 'Movie,Series',
+        IncludeItemTypes: scope.kind === 'movies' ? 'Movie' : scope.kind === 'series' ? 'Series' : 'Movie,Series',
         SortBy: 'SortName',
         SortOrder: 'Ascending',
-      });
+      }));
     default:
       return Promise.resolve([]);
   }

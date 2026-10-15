@@ -82,7 +82,9 @@ function InfoIcon() {
 }
 
 export function isTouchDevice() {
+  if (isTvLayout()) return false;
   return (
+    ('ontouchstart' in window && window.innerWidth <= 1024) ||
     window.innerWidth <= 768 ||
     /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   );
@@ -92,6 +94,7 @@ export function isTvLayout() {
   return (
     document.documentElement.classList.contains('layout-tv') ||
     document.body.classList.contains('layout-tv') ||
+    /tv|tizen|webos|viera|smarttv|googletv|appletv/i.test(navigator.userAgent) ||
     window.location.hash.toLowerCase().includes('tv')
   );
 }
@@ -556,6 +559,8 @@ export function createCardPreviewFeature(cache) {
   let activeCard = null;
   let activeId = null;
   let isPointerInPopover = false;
+  let tvFocusTimer = 0;
+  let tvFocusedId = null;
 
   function ensurePortal() {
     if (!portalElement || !dom.isConnected(portalElement)) {
@@ -572,10 +577,13 @@ export function createCardPreviewFeature(cache) {
   function closePreview() {
     window.clearTimeout(showTimer);
     window.clearTimeout(hideTimer);
+    window.clearTimeout(tvFocusTimer);
     showTimer = 0;
     hideTimer = 0;
+    tvFocusTimer = 0;
     activeCard = null;
     activeId = null;
+    tvFocusedId = null;
     isPointerInPopover = false;
     if (portalElement) {
       render(null, portalElement);
@@ -690,12 +698,12 @@ export function createCardPreviewFeature(cache) {
     // DO NOT intercept desktop clicks!
     if (!isTouchDevice()) return;
 
-    const card = event.target.closest('.card[data-id]');
+    const card = event.target.closest ? event.target.closest('.card[data-id]') : null;
     // Never intercept non-media items (e.g. My Media collection folders)
     if (!card || !isPreviewableCard(card)) return;
 
-    // Ignore clicks on existing interactive buttons inside the card
-    if (event.target.closest('button, a, input, select, .cardOverlayButton')) return;
+    // Ignore real controls, but allow the main card link to open the sheet on first tap.
+    if (event.target.closest('button, input, select, textarea, .cardOverlayButton, .cardOverlayFab-primary, .cardOverlayButton-centered, .cardOverlayButtonIcon')) return;
 
     const id = card.dataset.id;
     if (!id) return;
@@ -705,55 +713,64 @@ export function createCardPreviewFeature(cache) {
     showMobileBottomSheet(card, id);
   }
 
-  function onCardFocus(event) {
-    if (!isTvLayout()) return;
-
-    const card = event.target.closest('.card[data-id]');
-    if (!card || !isPreviewableCard(card)) return;
-
-    const id = card.dataset.id;
-    if (!id) return;
-
+  function showTvPopover(card, id) {
+    if (!card || !dom.isConnected(card) || !isPreviewableCard(card)) return;
     resolveMediaItem(id).then((mediaItem) => {
-      if (!mediaItem || !dom.isConnected(card)) return;
+      if (!mediaItem || tvFocusedId !== id || !dom.isConnected(card)) return;
       const meta = extractMediaMeta(mediaItem);
       if (!meta) return;
-
-      let tvOverlay = card.querySelector('.abyssfin-tv-overlay');
-      if (!tvOverlay) {
-        tvOverlay = document.createElement('div');
-        tvOverlay.className = 'abyssfin-tv-overlay';
-        const scalable = card.querySelector('.cardScalable') || card;
-        scalable.appendChild(tvOverlay);
-      }
-
+      const rect = card.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const position = calculateDesktopPosition(rect);
+      const portal = ensurePortal();
       render(
-        <div class="abyssfin-tv-overlay-inner">
-          <div class="abyssfin-preview-meta-row">
-            {meta.rating && <span class="abyssfin-badge-rating">{meta.rating}</span>}
-            {meta.duration && <span class="abyssfin-meta-duration">{meta.duration}</span>}
-            {meta.resolution && <span class="abyssfin-badge-pill">{meta.resolution}</span>}
-            {meta.audio && <span class="abyssfin-badge-pill abyssfin-badge-audio">{meta.audio}</span>}
-          </div>
-          {meta.genres.length > 0 && (
-            <div class="abyssfin-preview-genres">
-              {meta.genres.join(' • ')}
-            </div>
-          )}
-          <div class="abyssfin-tv-prompt">▶ Play  •  OK Details</div>
-        </div>,
-        tvOverlay
+        <CardPreviewPopOver
+          item={mediaItem}
+          meta={meta}
+          position={position}
+          onEnter={() => window.clearTimeout(hideTimer)}
+          onLeave={() => scheduleHide()}
+          onClose={closePreview}
+        />,
+        portal
       );
     });
   }
 
+  function onCardFocus(event) {
+    if (!isTvLayout()) return;
+    const card = event.target.closest ? event.target.closest('.card[data-id]') : null;
+    if (!card || !isPreviewableCard(card)) return;
+    const id = card.dataset.id;
+    if (!id) return;
+    window.clearTimeout(tvFocusTimer);
+    window.clearTimeout(hideTimer);
+    tvFocusedId = id;
+    activeCard = card;
+    activeId = id;
+    try {
+      card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    } catch {
+      // scrollIntoView may be unavailable on older TV browsers.
+    }
+    tvFocusTimer = window.setTimeout(() => {
+      if (tvFocusedId === id) showTvPopover(card, id);
+    }, 320);
+  }
+
   function onCardBlur(event) {
     if (!isTvLayout()) return;
-    const card = event.target.closest('.card[data-id]');
-    const tvOverlay = card?.querySelector('.abyssfin-tv-overlay');
-    if (tvOverlay) {
-      render(null, tvOverlay);
-      tvOverlay.remove();
+    window.clearTimeout(tvFocusTimer);
+    tvFocusTimer = 0;
+    tvFocusedId = null;
+    scheduleHide();
+  }
+
+  function onTvKeyDown(event) {
+    if (!isTvLayout()) return;
+    if (event.key === 'Escape' || event.keyCode === 461) {
+      tvFocusedId = null;
+      closePreview();
     }
   }
 
@@ -768,6 +785,7 @@ export function createCardPreviewFeature(cache) {
     document.addEventListener('click', onCardClick, true);
     document.addEventListener('focusin', onCardFocus, true);
     document.addEventListener('focusout', onCardBlur, true);
+    document.addEventListener('keydown', onTvKeyDown, true);
     window.addEventListener('scroll', closePreview, { passive: true, capture: true });
     window.addEventListener('wheel', closePreview, { passive: true });
     window.addEventListener('hashchange', closePreview, { passive: true });
@@ -781,6 +799,10 @@ export function createCardPreviewFeature(cache) {
     document.removeEventListener('click', onCardClick, true);
     document.removeEventListener('focusin', onCardFocus, true);
     document.removeEventListener('focusout', onCardBlur, true);
+    document.removeEventListener('keydown', onTvKeyDown, true);
+    window.clearTimeout(tvFocusTimer);
+    tvFocusTimer = 0;
+    tvFocusedId = null;
     window.removeEventListener('scroll', closePreview, { passive: true, capture: true });
     window.removeEventListener('wheel', closePreview, { passive: true });
     window.removeEventListener('hashchange', closePreview, { passive: true });

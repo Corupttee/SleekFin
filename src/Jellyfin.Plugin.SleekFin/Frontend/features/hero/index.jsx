@@ -37,21 +37,29 @@ function prepareLoading() {
   state.loadingTimer = window.setTimeout(finishLoading, 4000);
 }
 
-function isHomeRoute() {
+function routeKind() {
   const rawHash = (window.location.hash || '').replace(/^#\/?/, '');
   const path = rawHash.split('?')[0].toLowerCase();
-  if (path !== '' && path !== 'home' && path !== 'home.html' && path !== 'index.html') {
-    return false;
+  if (path === '' || path === 'home' || path === 'home.html' || path === 'index.html') {
+    const queryIndex = window.location.hash.indexOf('?');
+    const params = queryIndex >= 0 ? new URLSearchParams(window.location.hash.slice(queryIndex)) : null;
+    const tab = params?.get('tab');
+    if (!tab || tab === '0') return 'home';
+    return '';
   }
-  const queryIndex = window.location.hash.indexOf('?');
-  const params = queryIndex >= 0 ? new URLSearchParams(window.location.hash.slice(queryIndex)) : null;
-  const tab = params?.get('tab');
-  return !tab || tab === '0';
+  if (path.includes('movies')) return 'movies';
+  if (path.includes('tvshows') || path.includes('tvrecommended') || path.includes('series') || path.includes('shows')) return 'series';
+  return '';
+}
+
+function isHomeRoute() {
+  return routeKind() !== '';
 }
 
 function findHost() {
-  if (!isHomeRoute()) return null;
-  const selectors = [
+  const kind = routeKind();
+  if (!kind) return null;
+  const selectors = kind === 'home' ? [
     '#indexPage #homeTab.is-active .sections',
     '#indexPage #homeTab .sections',
     '#indexPage:not(.hide) .sections',
@@ -60,10 +68,20 @@ function findHost() {
     '#indexPage .homeSectionsContainer',
     '.sections.homeSectionsContainer',
     '.homeSectionsContainer',
+  ] : [
+    '#moviesPage:not(.hide) .pageContent',
+    '#tvshowsPage:not(.hide) .pageContent',
+    '#tvRecommendedPage:not(.hide) .pageContent',
+    '#moviesPage .pageContent',
+    '#tvshowsPage .pageContent',
+    '#tvRecommendedPage .pageContent',
+    '#moviesPage:not(.hide)',
+    '#tvshowsPage:not(.hide)',
+    '#tvRecommendedPage:not(.hide)',
   ];
   for (let i = 0; i < selectors.length; i++) {
     const el = Array.from(document.querySelectorAll(selectors[i])).find(dom.isVisible);
-    if (el) return el;
+    if (el) return { element: el, kind };
   }
   return null;
 }
@@ -84,10 +102,21 @@ function unmount() {
   removeMount();
 }
 
-function createRoot(host) {
+function createRoot(host, kind) {
   // Jellyfin's customized items container is upgraded only when its `is` attribute is parsed.
   const root = dom.element('<div is="emby-itemscontainer" class="sleekfin-hero itemsContainer" data-contextmenu="false" data-multiselect="false" data-state="loading"></div>');
-  host.parentNode.insertBefore(root, host);
+  if (kind && kind !== 'home') root.classList.add('sleekfin-hero--library');
+  root.dataset.library = kind || 'home';
+  if (host.element) {
+    const container = host.element;
+    if (kind && kind !== 'home') {
+      container.insertBefore(root, container.firstChild);
+    } else {
+      container.parentNode.insertBefore(root, container);
+    }
+  } else {
+    host.parentNode.insertBefore(root, host);
+  }
   state.mount = root;
   document.documentElement.classList.add(ROOT_MOUNTED_CLASS);
   finishLoading();
@@ -110,7 +139,8 @@ function renderHero(root, entries, settings) {
 function mount(host) {
   const client = window.ApiClient;
   const generation = ++state.generation;
-  const root = createRoot(host);
+  const kind = host.kind || 'home';
+  const root = createRoot(host, kind);
   loadSettings(client)
     .then((settings) => {
       if (generation !== state.generation || state.mount !== root || !dom.isConnected(root)) return null;
@@ -127,13 +157,13 @@ function mount(host) {
       if (result.entries.length) {
         renderHero(root, result.entries, result.settings);
       } else {
-        state.failedHost = host;
+        state.failedHost = host.element;
         removeMount();
       }
     })
     .catch(() => {
       if (generation === state.generation) {
-        state.failedHost = host;
+        state.failedHost = host.element;
         removeMount();
       }
     });
@@ -152,8 +182,13 @@ function reconcile() {
     removeMount();
     return;
   }
-  if (state.mount && dom.isConnected(state.mount) && state.mount.nextElementSibling === host) return;
-  if (state.failedHost === host) return;
+  const hostEl = host.element;
+  if (state.mount && dom.isConnected(state.mount)) {
+    const kind = state.mount.dataset.library || 'home';
+    if (kind === 'home' && state.mount.nextElementSibling === hostEl) return;
+    if (kind !== 'home' && hostEl.contains(state.mount) && state.mount.dataset.library === host.kind) return;
+  }
+  if (state.failedHost === hostEl) return;
 
   unmount();
   mount(host);
@@ -161,7 +196,7 @@ function reconcile() {
 
 function scheduleReconcile() {
   const home = isHomeRoute();
-  const loading = home && state.enabled !== false && !dom.isConnected(state.mount) && (!state.failedHost || state.failedHost !== findHost());
+  const loading = home && state.enabled !== false && !dom.isConnected(state.mount);
   if (!loading) finishLoading();
   else prepareLoading();
   if (state.reconcileTimer) return;

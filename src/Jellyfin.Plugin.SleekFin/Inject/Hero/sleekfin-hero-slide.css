@@ -55,6 +55,59 @@
     width: 100%;
 }
 
+.sleekfin-hero-badges {
+    align-items: center;
+    bottom: 28px;
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    right: var(--sleekfin-page-gutter);
+    z-index: 3;
+}
+
+.sleekfin-hero-badge {
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    color: #fff;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 6px;
+    letter-spacing: 0.01em;
+    padding: 6px 10px;
+    white-space: nowrap;
+}
+
+.sleekfin-hero-badge-dot {
+    background: #e50914;
+    border-radius: 2px;
+    display: inline-block;
+    height: 12px;
+    width: 8px;
+}
+
+.sleekfin-hero-badge-top10 {
+    background: #e50914;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 2px 4px;
+}
+
+.sleekfin-hero--library .sleekfin-hero-content {
+    padding: 24px 40px 56px;
+}
+
+.sleekfin-hero--library .sleekfin-hero-badges {
+    bottom: 24px;
+    right: 40px;
+}
+
 .sleekfin-hero-stack {
     max-width: var(--sleekfin-hero-content-max-width, 560px);
     min-width: 0;
@@ -228,5 +281,22 @@
 
     .sleekfin-hero-facts {
         font-size: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sleekfin-hero-badges {
+        bottom: 16px;
+        left: 12px;
+        right: auto;
+    }
+
+    .sleekfin-hero-badge {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .sleekfin-hero-description {
+        -webkit-line-clamp: 2;
     }
 }

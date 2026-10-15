@@ -14,6 +14,38 @@ html.sleekfin-hero-mounted #slides-container {
     margin-top: 0;
 }
 
+/* Netflix-style library billboard: rounded card with page gutters. */
+.sleekfin-hero--library {
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    margin: 12px var(--sleekfin-page-gutter) 8px;
+    min-height: min(560px, 72vh);
+    width: auto;
+}
+
+.sleekfin-hero--library .sleekfin-hero-slide {
+    border-radius: 20px;
+}
+
+@media (max-width: 767px) {
+    .sleekfin-hero--library {
+        border-radius: 16px;
+        margin: 8px 12px 4px;
+        min-height: 52vh;
+    }
+}
+
+/* TV focus must stay visible inside rounded billboard. */
+.layout-tv .sleekfin-hero--library,
+.layout-tv .sleekfin-hero {
+    overflow: hidden;
+}
+
+.layout-tv .sleekfin-hero .sleekfin-button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
 html:is(.sleekfin-hero-boot-loading, .sleekfin-hero-loading) #indexPage #homeTab.is-active > .sections::before {
     animation: sleekfin-skeleton-pulse 1.4s ease-in-out infinite alternate;
     background:

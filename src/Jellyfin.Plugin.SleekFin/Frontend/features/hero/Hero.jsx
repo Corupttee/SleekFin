@@ -65,5 +65,6 @@ export function Hero({ entries, root, settings }) {
     };
   }, [entries.length, root, settings.autoRotateSeconds, settings.swipeEnabled]);
 
-  return entries.map((entry, index) => <HeroSlide key={`${entry.display.Id || index}-${entry.play.Id || index}`} entry={entry} active={index === activeIndex} settings={settings} />);
+  const library = root.dataset.library || 'home';
+  return entries.map((entry, index) => <HeroSlide key={`${entry.display.Id || index}-${entry.play.Id || index}`} entry={entry} active={index === activeIndex} settings={settings} index={index} library={library} />);
 }
