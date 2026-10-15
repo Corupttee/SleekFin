@@ -11,11 +11,11 @@
     "versions": [
       {
         "version": "1.5.2.0",
-        "changelog": "Adopt Abyss styling for cards, player OSD, cast, and settings.",
+        "changelog": "target net9.0 for Jellyfin 10.11 packages",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/Corupttee/SleekFin/releases/download/1.5.2.0/Jellyfin.Plugin.SleekFin_10.11.0.zip",
-        "checksum": "",
-        "timestamp": "2026-10-15T18:00:00.0000000Z",
+        "checksum": "FC7BD753C1B54DCA2AF1BC5CE1D13CD7",
+        "timestamp": "2026-10-15T16:19:16.0000000Z",
         "dependencies": []
       },
       {
