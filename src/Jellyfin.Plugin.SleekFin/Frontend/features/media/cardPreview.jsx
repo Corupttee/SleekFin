@@ -198,15 +198,28 @@ export function extractMediaMeta(mediaItem) {
 }
 
 export function playMediaItem(mediaItem) {
-  if (window.PlaybackManager?.play) {
-    window.PlaybackManager.play({ ids: [mediaItem.Id] });
-  } else {
-    const btn = document.createElement('button');
-    Object.entries(item.actionAttributes(mediaItem, 'play')).forEach(([k, v]) => btn.setAttribute(k, v));
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
+  if (!mediaItem?.Id) return;
+
+  const pm = window.playbackManager || window.PlaybackManager;
+  if (pm?.play) {
+    try {
+      pm.play({ ids: [mediaItem.Id] });
+      return;
+    } catch (e) {
+      console.warn('[AbyssFin] playbackManager.play failed, falling back', e);
+    }
   }
+
+  const card = document.querySelector(`.card[data-id="${mediaItem.Id}"]`);
+  if (card) {
+    const playBtn = card.querySelector('.cardOverlayButton-centered, .cardOverlayFab-primary, [data-action="play"]');
+    if (playBtn) {
+      playBtn.click();
+      return;
+    }
+  }
+
+  openMediaDetails(mediaItem);
 }
 
 export function openMediaDetails(mediaItem) {
@@ -267,21 +280,27 @@ function calculateDesktopPosition(cardRect) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  const targetWidth = Math.min(Math.max(cardRect.width * 1.25, 320), 420, viewportWidth - 32);
+  const targetWidth = Math.min(Math.max(cardRect.width * 1.22, 290), 380, viewportWidth - 40);
   let left = cardRect.left + (cardRect.width - targetWidth) / 2;
 
-  if (left < 16) left = 16;
-  if (left + targetWidth > viewportWidth - 16) {
-    left = viewportWidth - targetWidth - 16;
+  if (cardRect.left < 80) {
+    left = Math.max(20, cardRect.left - 10);
+  } else if (cardRect.right > viewportWidth - 80) {
+    left = Math.min(viewportWidth - targetWidth - 20, cardRect.right - targetWidth + 10);
+  }
+
+  if (left < 20) left = 20;
+  if (left + targetWidth > viewportWidth - 20) {
+    left = viewportWidth - targetWidth - 20;
   }
 
   let top = cardRect.top - 20;
   const estimatedHeight = 350;
 
-  if (top < 16) {
-    top = 16;
-  } else if (top + estimatedHeight > viewportHeight - 16) {
-    top = Math.max(16, viewportHeight - estimatedHeight - 16);
+  if (top < 20) {
+    top = 20;
+  } else if (top + estimatedHeight > viewportHeight - 20) {
+    top = Math.max(20, viewportHeight - estimatedHeight - 20);
   }
 
   return { left: Math.round(left), top: Math.round(top), width: Math.round(targetWidth) };
@@ -339,12 +358,16 @@ export function CardPreviewPopOver({ item: mediaItem, meta, position, onEnter, o
         <div class="abyssfin-preview-actions">
           <button
             type="button"
-            class="abyssfin-btn-play"
+            class="abyssfin-btn-play itemAction"
+            data-action="play"
+            data-id={mediaItem.Id}
+            data-type={mediaItem.Type}
+            data-mediatype={mediaItem.MediaType || 'Video'}
             title="Play"
             onClick={(e) => {
               e.stopPropagation();
-              playMediaItem(mediaItem);
               onClose?.();
+              playMediaItem(mediaItem);
             }}
           >
             <PlayIcon />

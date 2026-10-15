@@ -139,15 +139,15 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
 /* Popover Body Content */
 .abyssfin-preview-body {
     box-sizing: border-box;
-    padding: 14px 16px 16px;
+    padding: 16px 18px 18px;
 }
 
 /* Action Buttons Row */
 .abyssfin-preview-actions {
     align-items: center;
     display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 14px;
 }
 
 .abyssfin-btn-play {
@@ -160,11 +160,11 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
     color: #000000 !important;
     cursor: pointer;
     display: inline-flex;
-    height: 38px;
+    height: 42px;
     justify-content: center;
     padding: 0;
     transition: transform 150ms ease, background-color 150ms ease;
-    width: 38px;
+    width: 42px;
 }
 
 .abyssfin-btn-play:hover {
@@ -185,11 +185,11 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
     color: #ffffff !important;
     cursor: pointer;
     display: inline-flex;
-    height: 38px;
+    height: 42px;
     justify-content: center;
     padding: 0;
     transition: all 150ms ease;
-    width: 38px;
+    width: 42px;
 }
 
 .abyssfin-btn-action:hover {
@@ -555,20 +555,30 @@ header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child:hover
 }
 
 /* Top-Right Unified Floating Glass Pill */
+html.sleekfin-header-mounted [data-sleekfin-header-toolbar]::after,
+html.sleekfin-header-mounted [data-sleekfin-header-toolbar][data-sleekfin-header-measured="true"]::after {
+    content: none !important;
+    display: none !important;
+    opacity: 0 !important;
+}
+
 header.MuiAppBar-root > .MuiToolbar-root > .MuiStack-root:first-of-type {
     align-items: center !important;
     background: rgba(20, 20, 24, 0.75) !important;
+    background-color: rgba(20, 20, 24, 0.75) !important;
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
     border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-right: none !important;
     border-radius: 50px 0 0 50px !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box !important;
     display: flex !important;
     gap: 4px !important;
+    height: 44px !important;
     left: auto !important;
     margin: 0 0 0 auto !important;
-    padding: 4px 8px 4px 14px !important;
+    padding: 0 8px 0 14px !important;
     position: static !important;
     transform: none !important;
     z-index: 10 !important;
@@ -577,18 +587,21 @@ header.MuiAppBar-root > .MuiToolbar-root > .MuiStack-root:first-of-type {
 header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:last-child {
     align-items: center !important;
     background: rgba(20, 20, 24, 0.75) !important;
+    background-color: rgba(20, 20, 24, 0.75) !important;
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
     border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 0 50px 50px 0 !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box !important;
     display: flex !important;
     gap: 2px !important;
+    height: 44px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     order: initial !important;
-    padding: 4px 12px 4px 6px !important;
+    padding: 0 12px 0 6px !important;
     z-index: 10 !important;
 }
 
@@ -596,7 +609,7 @@ header.MuiAppBar-root > .MuiToolbar-root:not(:has(> .MuiStack-root:first-of-type
     border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 50px !important;
     margin-left: auto !important;
-    padding: 4px 12px !important;
+    padding: 0 14px !important;
 }
 
 header.MuiAppBar-root .MuiButton-root {

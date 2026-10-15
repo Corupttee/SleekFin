@@ -4,10 +4,11 @@ html.sleekfin-details-mounted .layout-desktop .itemBackdrop,
 html.sleekfin-details-mounted .layout-tv .itemBackdrop,
 html.sleekfin-details-mounted .itemBackdrop {
     background-attachment: scroll !important;
+    background-color: #000000 !important;
     background-position: center 20% !important;
     background-size: cover !important;
-    height: var(--sleekfin-details-hero-height, 75vh) !important;
-    min-height: 520px !important;
+    height: var(--sleekfin-details-hero-height, 80vh) !important;
+    min-height: 580px !important;
     inset: 0 0 auto !important;
     margin: 0 !important;
     opacity: 1 !important;
@@ -15,6 +16,8 @@ html.sleekfin-details-mounted .itemBackdrop {
     position: absolute !important;
     width: 100% !important;
     z-index: 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.12) 88%, transparent 100%) !important;
+    mask-image: linear-gradient(180deg, #000 0%, #000 45%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.12) 88%, transparent 100%) !important;
 }
 
 .sleekfin-details-backdrop-layer {
@@ -25,14 +28,20 @@ html.sleekfin-details-mounted .itemBackdrop {
     opacity: 0;
     pointer-events: none;
     position: absolute !important;
-    transform: scale(1.04);
-    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 1000ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transform: scale(1.03);
+    transition: opacity 750ms cubic-bezier(0.16, 1, 0.3, 1), transform 1100ms cubic-bezier(0.16, 1, 0.3, 1) !important;
     z-index: 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.12) 88%, transparent 100%) !important;
+    mask-image: linear-gradient(180deg, #000 0%, #000 45%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.12) 88%, transparent 100%) !important;
 }
 
 .sleekfin-details-backdrop-layer.is-active {
     opacity: 1 !important;
     transform: scale(1) !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage {
+    background-color: #000000 !important;
 }
 
 html.sleekfin-details-mounted #itemDetailPage .detailLogo {
@@ -65,12 +74,12 @@ html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdr
 
 html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
 #itemDetailPage[data-sleekfin-details] #itemBackdrop::before {
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.84) 0%, rgba(0, 0, 0, 0.56) 20%, rgba(0, 0, 0, 0.25) 42%, transparent 68%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.62) 22%, rgba(0, 0, 0, 0.28) 46%, transparent 72%) !important;
 }
 
 html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::after,
 #itemDetailPage[data-sleekfin-details] #itemBackdrop::after {
-    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.14) 64%, rgba(0, 0, 0, 0.55) 82%, var(--sleekfin-background) 100%);
+    background: linear-gradient(180deg, transparent 0%, transparent 35%, rgba(0, 0, 0, 0.18) 50%, rgba(0, 0, 0, 0.52) 66%, rgba(0, 0, 0, 0.88) 82%, #000000 100%) !important;
 }
 
 html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] > #itemBackdrop > .sleekfin-details-trailer {

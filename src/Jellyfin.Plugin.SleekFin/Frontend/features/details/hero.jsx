@@ -109,7 +109,7 @@ export function createHero(page) {
 
     if (backdropUrl) {
       transitionBackdrop(backdropUrl);
-      nativeBackdrop.style.backgroundImage = `url("${backdropUrl.replace(/["\\]/g, '\\$&')}")`;
+      nativeBackdrop.style.backgroundImage = 'none';
     }
     trailerPreview.update(mediaItem, trailerBackgroundEnabled);
   }
