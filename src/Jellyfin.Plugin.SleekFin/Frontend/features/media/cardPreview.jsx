@@ -1,0 +1,713 @@
+import { dom, h, item, render, useState } from '../../shared/runtime.js';
+
+const PORTAL_ID = 'abyssfin-preview-portal';
+const HOVER_DELAY_MS = 260;
+const HIDE_DELAY_MS = 200;
+
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+      <polygon points="6,4 20,12 6,20" />
+    </svg>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function ThumbsUpIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  );
+}
+
+function VolumeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
+function InfoIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4" />
+      <path d="M12 8h.01" />
+    </svg>
+  );
+}
+
+export function isTouchDevice() {
+  return (
+    window.matchMedia('(pointer: coarse)').matches ||
+    window.innerWidth <= 768 ||
+    /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  );
+}
+
+export function isTvLayout() {
+  return (
+    document.documentElement.classList.contains('layout-tv') ||
+    document.body.classList.contains('layout-tv') ||
+    window.location.hash.toLowerCase().includes('tv')
+  );
+}
+
+export function extractMediaMeta(mediaItem) {
+  if (!mediaItem) return null;
+
+  const type = mediaItem.Type === 'Series' ? 'TV Show' : mediaItem.Type === 'Movie' ? 'Movie' : mediaItem.Type || '';
+  const rating = mediaItem.OfficialRating || mediaItem.CustomRating || mediaItem.InheritedParentRating || '';
+
+  let duration = '';
+  if (mediaItem.Type === 'Series') {
+    const seasons = mediaItem.ChildCount || 1;
+    duration = `${seasons} Season${seasons > 1 ? 's' : ''}`;
+  } else {
+    duration = item.formatRuntime(mediaItem.RunTimeTicks);
+  }
+
+  let resolution = '';
+  let isHdr = false;
+  let audio = '';
+
+  const streams = mediaItem.MediaStreams || [];
+  const videoStream = streams.find((s) => s.Type === 'Video');
+  if (videoStream) {
+    const width = videoStream.Width || 0;
+    const height = videoStream.Height || 0;
+    if (width >= 3800 || height >= 2100) resolution = '4K';
+    else if (width >= 1200 || height >= 700) resolution = 'HD';
+
+    if (
+      videoStream.VideoRange?.includes('HDR') ||
+      videoStream.VideoRangeType?.includes('HDR') ||
+      videoStream.ColorTransfer === 'smpte2084'
+    ) {
+      isHdr = true;
+    }
+  } else if (mediaItem.Width >= 3800) {
+    resolution = '4K';
+  } else if (mediaItem.Width >= 1200) {
+    resolution = 'HD';
+  }
+
+  const audioStream = streams.find((s) => s.Type === 'Audio');
+  if (audioStream) {
+    const title = (audioStream.Title || '').toLowerCase();
+    const codec = (audioStream.Codec || '').toLowerCase();
+    const profile = (audioStream.Profile || '').toLowerCase();
+    if (title.includes('atmos') || profile.includes('atmos') || codec === 'truehd') {
+      audio = 'Spatial Audio';
+    } else if (audioStream.Channels >= 6) {
+      audio = '5.1';
+    } else if (audioStream.Channels >= 8) {
+      audio = '7.1';
+    }
+  }
+
+  const genres = (mediaItem.Genres || []).slice(0, 3);
+  const backdropUrl =
+    item.imageUrl(mediaItem, 'Backdrop', { maxWidth: 1280 }) ||
+    item.imageUrl(mediaItem, 'Primary', { maxWidth: 800 });
+
+  const logoUrl = item.imageUrl(mediaItem, 'Logo', { maxWidth: 600 });
+  const communityScore = Number(mediaItem.CommunityRating || 0);
+
+  return {
+    id: mediaItem.Id,
+    name: mediaItem.Name,
+    type,
+    rating,
+    duration,
+    resolution,
+    isHdr,
+    audio,
+    genres,
+    backdropUrl,
+    logoUrl,
+    overview: mediaItem.Overview || mediaItem.Taglines?.[0] || '',
+    communityScore: communityScore > 0 ? communityScore.toFixed(1) : '',
+    isFavorite: Boolean(mediaItem.UserData?.IsFavorite),
+    isPlayed: Boolean(mediaItem.UserData?.Played),
+  };
+}
+
+export function playMediaItem(mediaItem) {
+  if (window.PlaybackManager?.play) {
+    window.PlaybackManager.play({ ids: [mediaItem.Id] });
+  } else {
+    const btn = document.createElement('button');
+    Object.entries(item.actionAttributes(mediaItem, 'play')).forEach(([k, v]) => btn.setAttribute(k, v));
+    document.body.appendChild(btn);
+    btn.click();
+    btn.remove();
+  }
+}
+
+export function openMediaDetails(mediaItem) {
+  const serverId = mediaItem.ServerId || (window.ApiClient?.serverId?.()) || '';
+  const hash = `#/details?id=${mediaItem.Id}${serverId ? `&serverId=${serverId}` : ''}`;
+  if (window.appRouter?.showItem) {
+    window.appRouter.showItem(mediaItem.Id, serverId);
+  } else if (window.appRouter?.show) {
+    window.appRouter.show(hash.slice(1));
+  } else {
+    window.location.hash = hash;
+  }
+}
+
+export async function toggleMediaFavorite(mediaItem, onChange) {
+  const client = window.ApiClient;
+  const userId = client?.getCurrentUserId?.();
+  if (!client || !userId || !mediaItem?.Id) return;
+
+  const current = Boolean(mediaItem.UserData?.IsFavorite);
+  const next = !current;
+  if (!mediaItem.UserData) mediaItem.UserData = {};
+  mediaItem.UserData.IsFavorite = next;
+  onChange(next);
+
+  try {
+    await client.updateFavoriteStatus(userId, mediaItem.Id, next);
+  } catch {
+    mediaItem.UserData.IsFavorite = current;
+    onChange(current);
+  }
+}
+
+export async function toggleMediaPlayed(mediaItem, onChange) {
+  const client = window.ApiClient;
+  const userId = client?.getCurrentUserId?.();
+  if (!client || !userId || !mediaItem?.Id) return;
+
+  const current = Boolean(mediaItem.UserData?.Played);
+  const next = !current;
+  if (!mediaItem.UserData) mediaItem.UserData = {};
+  mediaItem.UserData.Played = next;
+  onChange(next);
+
+  try {
+    if (next) {
+      await client.markPlayed(userId, mediaItem.Id, new Date().toISOString());
+    } else {
+      await client.markUnplayed(userId, mediaItem.Id);
+    }
+  } catch {
+    mediaItem.UserData.Played = current;
+    onChange(current);
+  }
+}
+
+function calculateDesktopPosition(cardRect) {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+
+  const targetWidth = Math.min(Math.max(cardRect.width * 1.25, 320), 420, viewportWidth - 32);
+  let left = cardRect.left + (cardRect.width - targetWidth) / 2;
+
+  if (left < 16) left = 16;
+  if (left + targetWidth > viewportWidth - 16) {
+    left = viewportWidth - targetWidth - 16;
+  }
+
+  let top = cardRect.top - 20;
+  const estimatedHeight = 350;
+
+  if (top < 16) {
+    top = 16;
+  } else if (top + estimatedHeight > viewportHeight - 16) {
+    top = Math.max(16, viewportHeight - estimatedHeight - 16);
+  }
+
+  return { left: Math.round(left), top: Math.round(top), width: Math.round(targetWidth) };
+}
+
+export function CardPreviewPopOver({ item: mediaItem, meta, position, onEnter, onLeave, onClose }) {
+  const [favorite, setFavorite] = useState(meta.isFavorite);
+  const [liked, setLiked] = useState(false);
+
+  return (
+    <div
+      class="abyssfin-preview-popover"
+      style={{
+        left: `${position.left}px`,
+        top: `${position.top}px`,
+        width: `${position.width}px`,
+      }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
+      <div class="abyssfin-preview-media" onClick={() => openMediaDetails(mediaItem)}>
+        {meta.backdropUrl ? (
+          <img class="abyssfin-preview-backdrop" src={meta.backdropUrl} alt={meta.name} />
+        ) : (
+          <div class="abyssfin-preview-backdrop-fallback" />
+        )}
+        <div class="abyssfin-preview-vignette" />
+
+        <div class="abyssfin-preview-title-wrap">
+          {meta.logoUrl ? (
+            <img class="abyssfin-preview-logo" src={meta.logoUrl} alt={meta.name} />
+          ) : (
+            <span class="abyssfin-preview-title-text">{meta.name}</span>
+          )}
+        </div>
+
+        <button
+          type="button"
+          class="abyssfin-preview-sound-btn"
+          title="Audio preview"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <VolumeIcon />
+        </button>
+      </div>
+
+      <div class="abyssfin-preview-body">
+        <div class="abyssfin-preview-actions">
+          <button
+            type="button"
+            class="abyssfin-btn-play"
+            title="Play"
+            onClick={(e) => {
+              e.stopPropagation();
+              playMediaItem(mediaItem);
+              onClose?.();
+            }}
+          >
+            <PlayIcon />
+          </button>
+
+          <button
+            type="button"
+            class={`abyssfin-btn-action ${favorite ? 'is-active' : ''}`}
+            title={favorite ? 'In Watchlist' : 'Add to Watchlist'}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMediaFavorite(mediaItem, setFavorite);
+            }}
+          >
+            {favorite ? <CheckIcon /> : <PlusIcon />}
+          </button>
+
+          <button
+            type="button"
+            class={`abyssfin-btn-action ${liked ? 'is-liked' : ''}`}
+            title="Like"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLiked(!liked);
+            }}
+          >
+            <ThumbsUpIcon />
+          </button>
+
+          <button
+            type="button"
+            class="abyssfin-btn-action abyssfin-btn-more"
+            title="More Info"
+            onClick={(e) => {
+              e.stopPropagation();
+              openMediaDetails(mediaItem);
+              onClose?.();
+            }}
+          >
+            <ChevronDownIcon />
+          </button>
+        </div>
+
+        <div class="abyssfin-preview-meta-row">
+          {meta.type && <span class="abyssfin-meta-type">{meta.type}</span>}
+          {meta.rating && <span class="abyssfin-badge-rating">{meta.rating}</span>}
+          {meta.duration && <span class="abyssfin-meta-duration">{meta.duration}</span>}
+          {meta.resolution && <span class="abyssfin-badge-pill">{meta.resolution}</span>}
+          {meta.isHdr && <span class="abyssfin-badge-pill">HDR</span>}
+          {meta.audio && <span class="abyssfin-badge-pill abyssfin-badge-audio">{meta.audio}</span>}
+        </div>
+
+        {meta.genres.length > 0 && (
+          <div class="abyssfin-preview-genres">
+            {meta.genres.map((genre, idx) => (
+              <span key={genre} class="abyssfin-genre-item">
+                {idx > 0 && <span class="abyssfin-genre-bullet">•</span>}
+                {genre}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function CardPreviewBottomSheet({ item: mediaItem, meta, onClose }) {
+  const [favorite, setFavorite] = useState(meta.isFavorite);
+  const [played, setPlayed] = useState(meta.isPlayed);
+
+  return (
+    <div class="abyssfin-sheet-container">
+      <div class="abyssfin-sheet-backdrop" onClick={onClose} />
+      <div class="abyssfin-sheet-panel">
+        <div class="abyssfin-sheet-handle-bar">
+          <div class="abyssfin-sheet-handle" />
+          <button type="button" class="abyssfin-sheet-close" onClick={onClose}>
+            <CloseIcon />
+          </button>
+        </div>
+
+        <div class="abyssfin-sheet-media" onClick={() => openMediaDetails(mediaItem)}>
+          {meta.backdropUrl ? (
+            <img class="abyssfin-sheet-backdrop-img" src={meta.backdropUrl} alt={meta.name} />
+          ) : (
+            <div class="abyssfin-sheet-fallback-img" />
+          )}
+          <div class="abyssfin-sheet-vignette" />
+          <div class="abyssfin-sheet-title-box">
+            {meta.logoUrl ? (
+              <img class="abyssfin-sheet-logo" src={meta.logoUrl} alt={meta.name} />
+            ) : (
+              <span class="abyssfin-sheet-title-text">{meta.name}</span>
+            )}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="abyssfin-sheet-play-btn"
+          onClick={() => {
+            playMediaItem(mediaItem);
+            onClose();
+          }}
+        >
+          <PlayIcon />
+          <span>Play</span>
+        </button>
+
+        <div class="abyssfin-sheet-actions">
+          <button
+            type="button"
+            class={`abyssfin-sheet-icon-btn ${favorite ? 'is-active' : ''}`}
+            onClick={() => toggleMediaFavorite(mediaItem, setFavorite)}
+          >
+            {favorite ? <CheckIcon /> : <PlusIcon />}
+            <span>Watchlist</span>
+          </button>
+
+          <button
+            type="button"
+            class={`abyssfin-sheet-icon-btn ${played ? 'is-active' : ''}`}
+            onClick={() => toggleMediaPlayed(mediaItem, setPlayed)}
+          >
+            <CheckIcon />
+            <span>{played ? 'Watched' : 'Mark Watched'}</span>
+          </button>
+
+          <button
+            type="button"
+            class="abyssfin-sheet-icon-btn"
+            onClick={() => {
+              openMediaDetails(mediaItem);
+              onClose();
+            }}
+          >
+            <InfoIcon />
+            <span>Details</span>
+          </button>
+        </div>
+
+        <div class="abyssfin-preview-meta-row" style={{ marginTop: '14px' }}>
+          {meta.type && <span class="abyssfin-meta-type">{meta.type}</span>}
+          {meta.rating && <span class="abyssfin-badge-rating">{meta.rating}</span>}
+          {meta.duration && <span class="abyssfin-meta-duration">{meta.duration}</span>}
+          {meta.resolution && <span class="abyssfin-badge-pill">{meta.resolution}</span>}
+          {meta.isHdr && <span class="abyssfin-badge-pill">HDR</span>}
+          {meta.audio && <span class="abyssfin-badge-pill abyssfin-badge-audio">{meta.audio}</span>}
+        </div>
+
+        {meta.overview && <p class="abyssfin-sheet-overview">{meta.overview}</p>}
+
+        {meta.genres.length > 0 && (
+          <div class="abyssfin-preview-genres">
+            {meta.genres.map((genre, idx) => (
+              <span key={genre} class="abyssfin-genre-item">
+                {idx > 0 && <span class="abyssfin-genre-bullet">•</span>}
+                {genre}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function createCardPreviewFeature(cache) {
+  let portalElement = null;
+  let showTimer = 0;
+  let hideTimer = 0;
+  let activeCard = null;
+  let activeId = null;
+  let isPointerInPopover = false;
+
+  function ensurePortal() {
+    if (!portalElement || !dom.isConnected(portalElement)) {
+      portalElement = document.getElementById(PORTAL_ID);
+      if (!portalElement) {
+        portalElement = document.createElement('div');
+        portalElement.id = PORTAL_ID;
+        document.body.appendChild(portalElement);
+      }
+    }
+    return portalElement;
+  }
+
+  function closePreview() {
+    window.clearTimeout(showTimer);
+    window.clearTimeout(hideTimer);
+    showTimer = 0;
+    hideTimer = 0;
+    activeCard = null;
+    activeId = null;
+    isPointerInPopover = false;
+    if (portalElement) {
+      render(null, portalElement);
+    }
+  }
+
+  function scheduleHide() {
+    window.clearTimeout(hideTimer);
+    hideTimer = window.setTimeout(() => {
+      if (!isPointerInPopover) {
+        closePreview();
+      }
+    }, HIDE_DELAY_MS);
+  }
+
+  async function resolveMediaItem(id) {
+    if (cache.has(id) && cache.get(id)) return cache.get(id);
+
+    const client = window.ApiClient;
+    const userId = client?.getCurrentUserId?.();
+    if (!client || !userId) return null;
+
+    try {
+      const mediaItem = await client.getItem(userId, id);
+      cache.set(id, mediaItem);
+      return mediaItem;
+    } catch {
+      return null;
+    }
+  }
+
+  async function showDesktopPopover(card, id) {
+    if (!card || !dom.isConnected(card)) return;
+
+    const mediaItem = await resolveMediaItem(id);
+    if (!mediaItem || activeId !== id) return;
+
+    const meta = extractMediaMeta(mediaItem);
+    if (!meta) return;
+
+    const rect = card.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const position = calculateDesktopPosition(rect);
+    const portal = ensurePortal();
+
+    render(
+      <CardPreviewPopOver
+        item={mediaItem}
+        meta={meta}
+        position={position}
+        onEnter={() => {
+          isPointerInPopover = true;
+          window.clearTimeout(hideTimer);
+        }}
+        onLeave={() => {
+          isPointerInPopover = false;
+          scheduleHide();
+        }}
+        onClose={closePreview}
+      />,
+      portal
+    );
+  }
+
+  async function showMobileBottomSheet(card, id) {
+    const mediaItem = await resolveMediaItem(id);
+    if (!mediaItem) return;
+
+    const meta = extractMediaMeta(mediaItem);
+    if (!meta) return;
+
+    const portal = ensurePortal();
+    render(<CardPreviewBottomSheet item={mediaItem} meta={meta} onClose={closePreview} />, portal);
+  }
+
+  function onPointerEnter(event) {
+    if (isTouchDevice() || isTvLayout()) return;
+
+    const card = event.target.closest('.card[data-id]');
+    if (!card) return;
+
+    const id = card.dataset.id;
+    if (!id) return;
+
+    window.clearTimeout(hideTimer);
+    window.clearTimeout(showTimer);
+
+    activeCard = card;
+    activeId = id;
+
+    showTimer = window.setTimeout(() => {
+      if (activeCard === card && activeId === id) {
+        showDesktopPopover(card, id);
+      }
+    }, HOVER_DELAY_MS);
+  }
+
+  function onPointerLeave(event) {
+    if (isTouchDevice() || isTvLayout()) return;
+
+    const card = event.target.closest('.card[data-id]');
+    if (!card) return;
+
+    window.clearTimeout(showTimer);
+    scheduleHide();
+  }
+
+  function onCardClick(event) {
+    if (!isTouchDevice()) return;
+
+    // Ignore clicks on existing interactive buttons inside the card
+    if (event.target.closest('button, a, input, select, .cardOverlayButton')) return;
+
+    const card = event.target.closest('.card[data-id]');
+    if (!card) return;
+
+    const id = card.dataset.id;
+    if (!id) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    showMobileBottomSheet(card, id);
+  }
+
+  function onCardFocus(event) {
+    if (!isTvLayout()) return;
+
+    const card = event.target.closest('.card[data-id]');
+    if (!card) return;
+
+    const id = card.dataset.id;
+    if (!id) return;
+
+    resolveMediaItem(id).then((mediaItem) => {
+      if (!mediaItem || !dom.isConnected(card)) return;
+      const meta = extractMediaMeta(mediaItem);
+      if (!meta) return;
+
+      let tvOverlay = card.querySelector('.abyssfin-tv-overlay');
+      if (!tvOverlay) {
+        tvOverlay = document.createElement('div');
+        tvOverlay.className = 'abyssfin-tv-overlay';
+        const scalable = card.querySelector('.cardScalable') || card;
+        scalable.appendChild(tvOverlay);
+      }
+
+      render(
+        <div class="abyssfin-tv-overlay-inner">
+          <div class="abyssfin-preview-meta-row">
+            {meta.rating && <span class="abyssfin-badge-rating">{meta.rating}</span>}
+            {meta.duration && <span class="abyssfin-meta-duration">{meta.duration}</span>}
+            {meta.resolution && <span class="abyssfin-badge-pill">{meta.resolution}</span>}
+            {meta.audio && <span class="abyssfin-badge-pill abyssfin-badge-audio">{meta.audio}</span>}
+          </div>
+          {meta.genres.length > 0 && (
+            <div class="abyssfin-preview-genres">
+              {meta.genres.join(' • ')}
+            </div>
+          )}
+          <div class="abyssfin-tv-prompt">▶ Play  •  OK Details</div>
+        </div>,
+        tvOverlay
+      );
+    });
+  }
+
+  function onCardBlur(event) {
+    if (!isTvLayout()) return;
+    const card = event.target.closest('.card[data-id]');
+    const tvOverlay = card?.querySelector('.abyssfin-tv-overlay');
+    if (tvOverlay) {
+      render(null, tvOverlay);
+      tvOverlay.remove();
+    }
+  }
+
+  let started = false;
+
+  function start() {
+    if (started) return;
+    started = true;
+
+    document.addEventListener('pointerenter', onPointerEnter, true);
+    document.addEventListener('pointerleave', onPointerLeave, true);
+    document.addEventListener('click', onCardClick, true);
+    document.addEventListener('focusin', onCardFocus, true);
+    document.addEventListener('focusout', onCardBlur, true);
+  }
+
+  function stop() {
+    started = false;
+    document.removeEventListener('pointerenter', onPointerEnter, true);
+    document.removeEventListener('pointerleave', onPointerLeave, true);
+    document.removeEventListener('click', onCardClick, true);
+    document.removeEventListener('focusin', onCardFocus, true);
+    document.removeEventListener('focusout', onCardBlur, true);
+    closePreview();
+    if (portalElement) {
+      portalElement.remove();
+      portalElement = null;
+    }
+  }
+
+  return { start, stop, closePreview };
+}

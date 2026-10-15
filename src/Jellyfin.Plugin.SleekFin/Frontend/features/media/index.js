@@ -1,9 +1,10 @@
 import { dom } from '../../shared/runtime.js';
+import { createCardPreviewFeature } from './cardPreview.jsx';
 import { cleanupInactiveMetadata, cleanupMetadata, renderMetadata } from './metadata.jsx';
 
 const MAIN_ROOT_CLASS = 'sleekfin-main-ui';
 const ROOT_CLASS = 'sleekfin-media-mounted';
-const PAGE_SELECTOR = '#indexPage, #moviesPage, #tvshowsPage, #tvRecommendedPage';
+const PAGE_SELECTOR = '#indexPage, #moviesPage, #tvshowsPage, #tvRecommendedPage, #itemsPage, #searchPage, .page:not(#itemDetailPage)';
 const features = (window.SleekFinFeatures = window.SleekFinFeatures || {});
 
 features.media?.stop?.();
@@ -17,6 +18,8 @@ const state = {
   timer: 0,
   userId: '',
 };
+
+const previewFeature = createCardPreviewFeature(state.cache);
 
 function isCurrent(generation) {
   return !state.stopped && generation === state.generation;
@@ -59,6 +62,7 @@ function load(ids) {
       .getItems(userId, {
         EnableTotalRecordCount: false,
         Ids: batch.join(','),
+        Fields: 'Overview,Genres,OfficialRating,MediaStreams,Taglines,ItemCounts,ChildCount',
       })
       .then((response) => {
         if (!isCurrent(generation)) return;
@@ -134,6 +138,7 @@ function start() {
 
   state.stopped = false;
   state.stopWatching = dom.watchSpa(schedule, { events: ['hashchange'] });
+  previewFeature.start();
   schedule();
 }
 
@@ -143,6 +148,7 @@ function stop() {
   state.stopped = true;
   state.stopWatching?.();
   state.stopWatching = null;
+  previewFeature.stop();
   deactivate();
 }
 
