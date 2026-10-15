@@ -3,7 +3,7 @@
   "changelog": "target net9.0 for Jellyfin 10.11 packages",
   "description": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "guid": "da36c4ef-1d10-4169-8a68-26b194d5301a",
-  "name": "SleekFin",
+  "name": "AbyssFin",
   "overview": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "owner": "Corupttee",
   "targetAbi": "10.11.0.0",

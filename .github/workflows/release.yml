@@ -150,7 +150,7 @@ jobs:
               changelog: $changelog,
               description: "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
               guid: "da36c4ef-1d10-4169-8a68-26b194d5301a",
-              name: "SleekFin",
+              name: "AbyssFin",
               overview: "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
               owner: "${{ env.REPO_OWNER }}",
               targetAbi: $targetAbi,
@@ -238,7 +238,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
-          name: SleekFin ${{ steps.version.outputs.version }}
+          name: AbyssFin ${{ steps.version.outputs.version }}
           body: |
             This is the release for version ${{ steps.version.outputs.version }} of SleekFin.
 
