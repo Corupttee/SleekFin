@@ -57,6 +57,33 @@ export function createHero(page) {
     destination.appendChild(element);
   }
 
+  let layerA = nativeBackdrop.querySelector('.sleekfin-details-backdrop-layer-a');
+  let layerB = nativeBackdrop.querySelector('.sleekfin-details-backdrop-layer-b');
+  if (!layerA) {
+    layerA = dom.element('<div class="sleekfin-details-backdrop-layer sleekfin-details-backdrop-layer-a"></div>');
+    layerB = dom.element('<div class="sleekfin-details-backdrop-layer sleekfin-details-backdrop-layer-b"></div>');
+    nativeBackdrop.prepend(layerB);
+    nativeBackdrop.prepend(layerA);
+  }
+
+  let activeLayer = layerA;
+  let currentBackdropUrl = '';
+
+  function transitionBackdrop(url) {
+    if (!url || url === currentBackdropUrl) return;
+    currentBackdropUrl = url;
+
+    const img = new Image();
+    img.onload = () => {
+      const nextLayer = activeLayer === layerA ? layerB : layerA;
+      nextLayer.style.backgroundImage = `url("${url.replace(/["\\]/g, '\\$&')}")`;
+      nextLayer.classList.add('is-active');
+      activeLayer.classList.remove('is-active');
+      activeLayer = nextLayer;
+    };
+    img.src = url;
+  }
+
   function restoreMoved() {
     moved.reverse().forEach((record) => {
       if (!hero.contains(record.element)) return;
@@ -81,6 +108,7 @@ export function createHero(page) {
     render(<Facts values={(mediaItem.Genres || []).map((genre) => ({ text: genre }))} />, genresRoot);
 
     if (backdropUrl) {
+      transitionBackdrop(backdropUrl);
       nativeBackdrop.style.backgroundImage = `url("${backdropUrl.replace(/["\\]/g, '\\$&')}")`;
     }
     trailerPreview.update(mediaItem, trailerBackgroundEnabled);
@@ -96,6 +124,8 @@ export function createHero(page) {
     const source = Array.from(page.querySelectorAll('.backdropImage')).find((element) => window.getComputedStyle(element).backgroundImage !== 'none');
     const background = source && window.getComputedStyle(source).backgroundImage;
     if (background && background !== 'none') {
+      const match = /url\("?([^"]*)"?\)/.exec(background);
+      if (match && match[1]) transitionBackdrop(match[1]);
       nativeBackdrop.style.backgroundImage = background;
     }
     hero.classList.toggle('sleekfin-details-has-logo', Boolean(logo && window.getComputedStyle(logo).backgroundImage !== 'none'));
@@ -124,6 +154,8 @@ export function createHero(page) {
       render(null, genresRoot);
       restoreMoved();
       hero.remove();
+      layerA?.remove();
+      layerB?.remove();
       nativeBackdrop.style.backgroundImage = backdropOriginal;
     },
     isConnected() {

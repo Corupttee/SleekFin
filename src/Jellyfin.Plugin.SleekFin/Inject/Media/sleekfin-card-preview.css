@@ -495,3 +495,133 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
     margin-top: 6px;
     text-transform: uppercase;
 }
+
+/* 5. Delete Default Card Overlay Buttons on Media Cards (Image 2) */
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayContainer,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton-centered,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayFab-primary,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton-br,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton-bl,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardContent-button,
+.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardIndicators {
+    display: none !important;
+}
+
+/* 6. Sleek Unified Top-Right Glass Header Pill (Image 1) */
+header.MuiAppBar-root {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+header.MuiAppBar-root > .MuiToolbar-root {
+    align-items: center !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    min-height: 64px !important;
+    padding: 14px 28px !important;
+    width: 100% !important;
+}
+
+/* Left circular back button */
+header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child,
+header.MuiAppBar-root > .MuiToolbar-root > button:first-child:not(.MuiButton-root),
+.sleekfin-details-back {
+    align-items: center !important;
+    background: rgba(20, 20, 24, 0.75) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important;
+    display: inline-flex !important;
+    height: 40px !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition: all 180ms ease !important;
+    width: 40px !important;
+}
+
+header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child:hover,
+.sleekfin-details-back:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    transform: scale(1.06) !important;
+}
+
+/* Top-Right Unified Floating Glass Pill */
+header.MuiAppBar-root > .MuiToolbar-root > .MuiStack-root:first-of-type {
+    align-items: center !important;
+    background: rgba(20, 20, 24, 0.75) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right: none !important;
+    border-radius: 50px 0 0 50px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    display: flex !important;
+    gap: 4px !important;
+    left: auto !important;
+    margin: 0 0 0 auto !important;
+    padding: 4px 8px 4px 14px !important;
+    position: static !important;
+    transform: none !important;
+    z-index: 10 !important;
+}
+
+header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:last-child {
+    align-items: center !important;
+    background: rgba(20, 20, 24, 0.75) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 0 50px 50px 0 !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    display: flex !important;
+    gap: 2px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    order: initial !important;
+    padding: 4px 12px 4px 6px !important;
+    z-index: 10 !important;
+}
+
+header.MuiAppBar-root > .MuiToolbar-root:not(:has(> .MuiStack-root:first-of-type)) > .MuiBox-root:last-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 50px !important;
+    margin-left: auto !important;
+    padding: 4px 12px !important;
+}
+
+header.MuiAppBar-root .MuiButton-root {
+    border-radius: 50px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 6px 12px !important;
+    text-transform: none !important;
+    transition: all 160ms ease !important;
+}
+
+header.MuiAppBar-root .MuiButton-root:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+header.MuiAppBar-root .MuiIconButton-root {
+    color: rgba(255, 255, 255, 0.85) !important;
+    padding: 6px !important;
+    transition: all 160ms ease !important;
+}
+
+header.MuiAppBar-root .MuiIconButton-root:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    transform: scale(1.05) !important;
+}

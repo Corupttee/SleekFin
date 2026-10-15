@@ -431,9 +431,21 @@ header.MuiAppBar-root>.MuiToolbar-root {
 }
 
 header.MuiAppBar-root>.MuiToolbar-root>.MuiStack-root:first-of-type {
-    position: absolute;
-    left: 45%;
-    transform: translateX(-45%);
+    position: static !important;
+    left: auto !important;
+    transform: none !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 50px 0 0 50px !important;
+    background: rgba(var(--abyss-glass-tint), 0.75) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right: none !important;
+    padding: 3px 6px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
 }
 
 html[data-theme="dark"] header.MuiAppBar-root>.MuiToolbar-root:nth-of-type(2) .MuiButtonBase-root {
@@ -475,9 +487,26 @@ header.MuiAppBar-root>.MuiToolbar-root:nth-child(2)>.MuiBox-root>.MuiChip-root {
 }
 
 
-header.MuiAppBar-root>.MuiToolbar-root:has(> .MuiStack-root:first-of-type)>.MuiBox-root:last-child {
-    order: -1;
-    margin-right: auto;
+header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:last-child {
+    order: initial !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 0 50px 50px 0 !important;
+    background: rgba(var(--abyss-glass-tint), 0.75) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 3px 8px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+header.MuiAppBar-root>.MuiToolbar-root:not(:has(> .MuiStack-root:first-of-type))>.MuiBox-root:last-child {
+    border-radius: 50px !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
+    margin-left: auto !important;
 }
 
 body:has(#videoOsdPage:not(.hide)) header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:last-child {

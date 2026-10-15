@@ -1,8 +1,9 @@
 import { dom, h, item, render, useState } from '../../shared/runtime.js';
 
 const PORTAL_ID = 'abyssfin-preview-portal';
-const HOVER_DELAY_MS = 260;
+const HOVER_DELAY_MS = 280;
 const HIDE_DELAY_MS = 200;
+const MEDIA_PREVIEW_TYPES = new Set(['Movie', 'Series', 'Episode', 'Trailer', 'MusicVideo', 'Video']);
 
 function PlayIcon() {
   return (
@@ -75,7 +76,6 @@ function InfoIcon() {
 
 export function isTouchDevice() {
   return (
-    window.matchMedia('(pointer: coarse)').matches ||
     window.innerWidth <= 768 ||
     /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   );
@@ -87,6 +87,34 @@ export function isTvLayout() {
     document.body.classList.contains('layout-tv') ||
     window.location.hash.toLowerCase().includes('tv')
   );
+}
+
+export function isPreviewableCard(card) {
+  if (!card) return false;
+
+  // NEVER preview collection folders, library cards, or user views under My Media
+  if (
+    card.matches(
+      '.homeLibraryButton, [data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Channel"], [data-type="Person"], [data-type="Genre"]'
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    card.closest(
+      '.homeLibraryButtonContainer, .homeSectionsContainer .verticalSection:has([data-type="CollectionFolder"]), #divVirtualFolders'
+    )
+  ) {
+    return false;
+  }
+
+  const type = card.dataset.type;
+  if (type && !MEDIA_PREVIEW_TYPES.has(type)) {
+    return false;
+  }
+
+  return true;
 }
 
 export function extractMediaMeta(mediaItem) {
@@ -274,7 +302,14 @@ export function CardPreviewPopOver({ item: mediaItem, meta, position, onEnter, o
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <div class="abyssfin-preview-media" onClick={() => openMediaDetails(mediaItem)}>
+      <div
+        class="abyssfin-preview-media"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose?.();
+          openMediaDetails(mediaItem);
+        }}
+      >
         {meta.backdropUrl ? (
           <img class="abyssfin-preview-backdrop" src={meta.backdropUrl} alt={meta.name} />
         ) : (
@@ -345,8 +380,8 @@ export function CardPreviewPopOver({ item: mediaItem, meta, position, onEnter, o
             title="More Info"
             onClick={(e) => {
               e.stopPropagation();
-              openMediaDetails(mediaItem);
               onClose?.();
+              openMediaDetails(mediaItem);
             }}
           >
             <ChevronDownIcon />
@@ -392,7 +427,13 @@ export function CardPreviewBottomSheet({ item: mediaItem, meta, onClose }) {
           </button>
         </div>
 
-        <div class="abyssfin-sheet-media" onClick={() => openMediaDetails(mediaItem)}>
+        <div
+          class="abyssfin-sheet-media"
+          onClick={() => {
+            onClose();
+            openMediaDetails(mediaItem);
+          }}
+        >
           {meta.backdropUrl ? (
             <img class="abyssfin-sheet-backdrop-img" src={meta.backdropUrl} alt={meta.name} />
           ) : (
@@ -443,8 +484,8 @@ export function CardPreviewBottomSheet({ item: mediaItem, meta, onClose }) {
             type="button"
             class="abyssfin-sheet-icon-btn"
             onClick={() => {
-              openMediaDetails(mediaItem);
               onClose();
+              openMediaDetails(mediaItem);
             }}
           >
             <InfoIcon />
@@ -537,7 +578,7 @@ export function createCardPreviewFeature(cache) {
   }
 
   async function showDesktopPopover(card, id) {
-    if (!card || !dom.isConnected(card)) return;
+    if (!card || !dom.isConnected(card) || !isPreviewableCard(card)) return;
 
     const mediaItem = await resolveMediaItem(id);
     if (!mediaItem || activeId !== id) return;
@@ -571,6 +612,8 @@ export function createCardPreviewFeature(cache) {
   }
 
   async function showMobileBottomSheet(card, id) {
+    if (!isPreviewableCard(card)) return;
+
     const mediaItem = await resolveMediaItem(id);
     if (!mediaItem) return;
 
@@ -585,7 +628,7 @@ export function createCardPreviewFeature(cache) {
     if (isTouchDevice() || isTvLayout()) return;
 
     const card = event.target.closest('.card[data-id]');
-    if (!card) return;
+    if (!card || !isPreviewableCard(card)) return;
 
     const id = card.dataset.id;
     if (!id) return;
@@ -614,13 +657,15 @@ export function createCardPreviewFeature(cache) {
   }
 
   function onCardClick(event) {
+    // DO NOT intercept desktop clicks!
     if (!isTouchDevice()) return;
+
+    const card = event.target.closest('.card[data-id]');
+    // Never intercept non-media items (e.g. My Media collection folders)
+    if (!card || !isPreviewableCard(card)) return;
 
     // Ignore clicks on existing interactive buttons inside the card
     if (event.target.closest('button, a, input, select, .cardOverlayButton')) return;
-
-    const card = event.target.closest('.card[data-id]');
-    if (!card) return;
 
     const id = card.dataset.id;
     if (!id) return;
@@ -634,7 +679,7 @@ export function createCardPreviewFeature(cache) {
     if (!isTvLayout()) return;
 
     const card = event.target.closest('.card[data-id]');
-    if (!card) return;
+    if (!card || !isPreviewableCard(card)) return;
 
     const id = card.dataset.id;
     if (!id) return;
@@ -693,6 +738,10 @@ export function createCardPreviewFeature(cache) {
     document.addEventListener('click', onCardClick, true);
     document.addEventListener('focusin', onCardFocus, true);
     document.addEventListener('focusout', onCardBlur, true);
+    window.addEventListener('scroll', closePreview, { passive: true, capture: true });
+    window.addEventListener('wheel', closePreview, { passive: true });
+    window.addEventListener('hashchange', closePreview, { passive: true });
+    window.addEventListener('popstate', closePreview, { passive: true });
   }
 
   function stop() {
@@ -702,6 +751,10 @@ export function createCardPreviewFeature(cache) {
     document.removeEventListener('click', onCardClick, true);
     document.removeEventListener('focusin', onCardFocus, true);
     document.removeEventListener('focusout', onCardBlur, true);
+    window.removeEventListener('scroll', closePreview, { passive: true, capture: true });
+    window.removeEventListener('wheel', closePreview, { passive: true });
+    window.removeEventListener('hashchange', closePreview, { passive: true });
+    window.removeEventListener('popstate', closePreview, { passive: true });
     closePreview();
     if (portalElement) {
       portalElement.remove();
