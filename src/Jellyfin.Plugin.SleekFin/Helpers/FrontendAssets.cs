@@ -26,6 +26,7 @@ public static class FrontendAssets
         new("sleekfin-fonts.css", "Theme"),
         new("sleekfin-tokens.css", "Theme"),
         new("sleekfin-foundation.css", "Theme"),
+        new("sleekfin-dashboard.css", "Theme"),
         new("sleekfin-control-surface.css", "Components"),
         new("sleekfin-dialog.css", "Components"),
         new("sleekfin-button.css", "Components"),

@@ -1,0 +1,213 @@
+/* AbyssFin Dashboard & Admin Sidebar Improvements */
+
+/* 1. Refined Sidebar Width & Glass Effect (Jellyfin 12 MUI / React) */
+html[data-theme="dark"] .MuiDrawer-root.MuiDrawer-docked {
+    transition: width 240ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html[data-theme="dark"] .MuiDrawer-root.MuiDrawer-docked,
+html[data-theme="dark"] .MuiDrawer-root.MuiDrawer-docked .MuiDrawer-paper {
+    width: 260px !important;
+}
+
+html[data-theme="dark"] .MuiDrawer-root.MuiDrawer-docked .MuiDrawer-paper {
+    background-color: rgba(var(--abyss-glass-tint), 0.82) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box !important;
+    height: calc(100vh - 32px) !important;
+    left: 16px !important;
+    top: 16px !important;
+    bottom: 16px !important;
+    padding: 16px 8px !important;
+    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease !important;
+}
+
+/* 2. Refined Sidebar for Legacy Jellyfin Dashboard (.editPageSidebar) */
+.editPageSidebar {
+    background-color: rgba(var(--abyss-glass-tint), 0.82) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box !important;
+    margin: 16px 0 !important;
+    width: 260px !important;
+    min-width: 260px !important;
+    transition: width 240ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease !important;
+}
+
+/* 3. Collapsed / Hidden State */
+html.abyssfin-sidebar-hidden .MuiDrawer-root.MuiDrawer-docked {
+    border: 0 !important;
+    flex-basis: 0 !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    max-width: 0 !important;
+    min-width: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+}
+
+html.abyssfin-sidebar-hidden .MuiDrawer-root.MuiDrawer-docked .MuiDrawer-paper {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-110%) !important;
+}
+
+html.abyssfin-sidebar-hidden .editPageSidebar,
+html.abyssfin-sidebar-hidden .content-secondary,
+html.abyssfin-sidebar-hidden .sidebar {
+    display: none !important;
+    width: 0 !important;
+}
+
+/* Allow main dashboard area to expand smoothly to full width */
+html.abyssfin-sidebar-hidden main,
+html.abyssfin-sidebar-hidden .content-primary,
+html.abyssfin-sidebar-hidden .withTabs,
+html.abyssfin-sidebar-hidden .MuiBox-root:has(> .mainAnimatedPage),
+html.abyssfin-sidebar-hidden .MuiBox-root:has(> #dashboardPage) {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    width: 100% !important;
+    transition: margin-left 240ms cubic-bezier(0.16, 1, 0.3, 1), padding 240ms ease !important;
+}
+
+/* 4. Header Toggle Button */
+.abyssfin-sidebar-toggle-btn {
+    align-items: center;
+    background: rgba(var(--abyss-glass-tint), 0.72) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur));
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur));
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 50px !important;
+    box-sizing: border-box;
+    color: #f1f2f4 !important;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    gap: 7px;
+    height: 36px;
+    justify-content: center;
+    margin: 0 8px;
+    padding: 0 14px;
+    transition: all 180ms ease;
+    user-select: none;
+    vertical-align: middle;
+    z-index: 1000;
+}
+
+.abyssfin-sidebar-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.16) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    transform: scale(1.04);
+}
+
+.abyssfin-sidebar-toggle-btn:active {
+    transform: scale(0.97);
+}
+
+.abyssfin-sidebar-toggle-btn.is-sidebar-hidden {
+    background: rgba(var(--abyss-accent), 0.15) !important;
+    border-color: rgba(var(--abyss-accent), 0.35) !important;
+    color: #fff !important;
+}
+
+.abyssfin-sidebar-toggle-icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
+
+/* 5. Collapse Button inside Sidebar */
+.abyssfin-sidebar-collapse-bar {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    width: 100%;
+}
+
+.abyssfin-sidebar-collapse-btn {
+    align-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 6px;
+    padding: 5px 8px;
+    transition: all 160ms ease;
+}
+
+.abyssfin-sidebar-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+/* 6. Floating Edge Toggle Button when Sidebar is Hidden */
+.abyssfin-sidebar-floating-toggle {
+    align-items: center;
+    background: rgba(30, 30, 32, 0.88) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-left: none !important;
+    border-radius: 0 16px 16px 0 !important;
+    box-shadow: 2px 4px 18px rgba(0, 0, 0, 0.45);
+    color: #f1f2f4 !important;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 6px;
+    height: 38px;
+    left: 0;
+    opacity: 0;
+    padding: 0 12px 0 8px;
+    pointer-events: none;
+    position: fixed;
+    top: 76px;
+    transform: translateX(-100%);
+    transition: opacity 220ms ease, transform 220ms var(--abyss-ease), background 160ms ease;
+    user-select: none;
+    z-index: 9999;
+}
+
+html.abyssfin-sidebar-hidden .abyssfin-sidebar-floating-toggle.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+.abyssfin-sidebar-floating-toggle:hover {
+    background: rgba(45, 45, 48, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 3px 6px 22px rgba(0, 0, 0, 0.55);
+}
+
+.abyssfin-sidebar-floating-toggle:active {
+    transform: scale(0.96);
+}

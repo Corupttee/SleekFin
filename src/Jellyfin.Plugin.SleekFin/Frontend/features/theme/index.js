@@ -1,5 +1,6 @@
 import { createScrollFeature } from '../scroll/index.js';
 import { createMoreMenuFeature } from './menus.js';
+import { createSidebarFeature } from './sidebar.js';
 
 const ROOT_CLASS = 'sleekfin-main-ui';
 const WINDOW_EVENTS = ['hashchange', 'load', 'pageshow', 'popstate'];
@@ -12,7 +13,7 @@ const ENHANCED_THEME = {
     secondaryBg: '--sleekfin-surface-raised',
     secondaryBgFallback: '#1a1c20',
     primaryAccent: '--sleekfin-accent',
-    primaryAccentFallback: '#dc2626',
+    primaryAccentFallback: '#f5f5f7',
     textColor: '--sleekfin-text',
     textColorFallback: '#f1f2f4',
     altAccent: '--sleekfin-border',
@@ -42,6 +43,7 @@ function createThemeFeature() {
   // one place guaranteed to be running on the pages whose scroll position Jellyfin does not restore.
   const scroll = createScrollFeature();
   const moreMenus = createMoreMenuFeature();
+  const sidebar = createSidebarFeature();
 
   function isDashboardRoute() {
     const route = (window.location.hash.slice(1) || window.location.pathname).split('?')[0].toLowerCase();
@@ -52,6 +54,7 @@ function createThemeFeature() {
     const active = !isDashboardRoute();
     document.documentElement.classList.toggle(ROOT_CLASS, active);
     syncEnhancedTheme(active);
+    sidebar.reconcile();
     if (!enhancedTimer && !window.JellyfinEnhanced?.initialized && document.querySelector('script[src*="/JellyfinEnhanced/"]')) {
       let checks = 0;
       // JE loads its themer asynchronously, and later detects the theme again after initialization.
@@ -73,6 +76,7 @@ function createThemeFeature() {
     reconcile();
     scroll.start();
     moreMenus.start();
+    sidebar.start();
   }
 
   function stop() {
@@ -84,6 +88,7 @@ function createThemeFeature() {
     syncEnhancedTheme(false);
     scroll.stop();
     moreMenus.stop();
+    sidebar.stop();
   }
 
   return { start, stop };

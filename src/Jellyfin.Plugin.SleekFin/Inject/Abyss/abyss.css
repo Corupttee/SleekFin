@@ -657,17 +657,26 @@ html[data-theme="dark"] .MuiDialog-paper {
 }
 
 html[data-theme="dark"] .MuiDrawer-paper {
-    background-color: rgba(var(--abyss-glass-tint), 0.69);
-    border-radius: 32px !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: solid 1px rgba(245, 245, 247, 0.2) !important;
-    left: 24px;
-    top: 24px;
-    bottom: 24px;
-    padding: 24px 0;
-    max-height: stretch;
-    min-width: fit-content;
-    width: 42vw;
+    background-color: rgba(var(--abyss-glass-tint), 0.78);
+    border-radius: 20px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+    border: solid 1px rgba(245, 245, 247, 0.16) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur));
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur));
+    box-sizing: border-box;
+    width: 260px !important;
+    max-width: 280px !important;
+}
+
+html[data-theme="dark"] .MuiDrawer-docked {
+    width: 260px !important;
+}
+
+html[data-theme="dark"] .MuiDrawer-docked .MuiDrawer-paper {
+    height: calc(100vh - 32px) !important;
+    top: 16px !important;
+    left: 16px !important;
+    bottom: 16px !important;
 }
 
 html[data-theme="dark"] .MuiDrawer-paper .MuiDivider-root {
@@ -803,15 +812,21 @@ html.abyss-spotlight-visible[data-theme="dark"] .MuiAppBar-root+div[aria-hidden=
 /* Navigation / drawer */
 .editPageSidebar,
 .mainDrawer {
-    background-color: rgba(var(--abyss-glass-tint), 0.69);
-    margin: 24px 0;
-    border-radius: 32px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: solid 1px rgba(245, 245, 247, 0.2) !important;
+    background-color: rgba(var(--abyss-glass-tint), 0.78);
+    backdrop-filter: blur(var(--abyss-glass-blur));
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur));
+    margin: 16px 0;
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+    border: solid 1px rgba(245, 245, 247, 0.16) !important;
+    width: 260px !important;
+    min-width: 260px !important;
+    box-sizing: border-box;
 }
 
 .mainDrawer.drawer-open {
-    margin: 24px;
+    margin: 16px;
+    width: min(280px, 80vw) !important;
 }
 
 .sidebarHeader {
@@ -2527,7 +2542,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     }
 
     .MuiDrawer-paper {
-        width: 60vw;
+        width: min(280px, 80vw) !important;
     }
 }
 
