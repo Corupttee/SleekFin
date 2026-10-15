@@ -10,6 +10,15 @@
     "repositoryUrl": "https://github.com/Corupttee/SleekFin",
     "versions": [
       {
+        "version": "1.5.7.0",
+        "changelog": "add Netflix-style card hover preview, mobile bottom sheet, and TV focus overlay",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/Corupttee/SleekFin/releases/download/1.5.7.0/Jellyfin.Plugin.SleekFin_10.11.0.zip",
+        "checksum": "F8F3988A148D01F21EC150C28A092E5C",
+        "timestamp": "2026-10-15T18:04:33.0000000Z",
+        "dependencies": []
+      },
+      {
         "version": "1.5.6.0",
         "changelog": "fix dashboard sidebar width, add collapse/expand toggle and full-width layout",
         "targetAbi": "10.11.0.0",
