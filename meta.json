@@ -1,14 +1,14 @@
 {
   "category": "General",
-  "changelog": "fix movie page backdrop transition, remove header ghost flaps, and fix card preview playback and bounds",
+  "changelog": "seamless header pill capsule, add to favourites heart button in card preview, and mobile button text bounds fix",
   "description": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "guid": "da36c4ef-1d10-4169-8a68-26b194d5301a",
   "name": "AbyssFin",
   "overview": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "owner": "Corupttee",
   "targetAbi": "10.11.0.0",
-  "timestamp": "2026-10-15T18:50:26.0000000Z",
-  "version": "1.6.1.0",
+  "timestamp": "2026-10-15T19:25:00.0000000Z",
+  "version": "1.6.2.0",
   "status": "Active",
   "autoUpdate": true,
   "assemblies": [

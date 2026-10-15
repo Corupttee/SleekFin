@@ -203,10 +203,15 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
 }
 
 .abyssfin-btn-action.is-active,
+.abyssfin-btn-action.is-favorite,
 .abyssfin-btn-action.is-liked {
     background: rgba(255, 255, 255, 0.25) !important;
     border-color: #ffffff !important;
     color: #ffffff !important;
+}
+
+.abyssfin-btn-action.is-favorite svg {
+    fill: #ffffff;
 }
 
 .abyssfin-btn-more {
@@ -432,10 +437,19 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
     width: 100%;
 }
 
+.abyssfin-sheet-play-btn span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .abyssfin-sheet-actions {
     display: flex;
     justify-content: space-around;
+    gap: 8px;
     margin-bottom: 14px;
+    width: 100%;
 }
 
 .abyssfin-sheet-icon-btn {
@@ -445,18 +459,33 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     display: flex;
+    flex: 1 1 0;
     flex-direction: column;
     font-family: inherit;
     font-size: 11px;
     font-weight: 500;
     gap: 5px;
-    padding: 6px 10px;
+    min-width: 0;
+    padding: 6px 4px;
+    text-align: center;
     transition: color 150ms ease;
+}
+
+.abyssfin-sheet-icon-btn span {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .abyssfin-sheet-icon-btn:hover,
 .abyssfin-sheet-icon-btn.is-active {
     color: #ffffff;
+}
+
+.abyssfin-sheet-icon-btn.is-favorite svg {
+    fill: #ffffff;
 }
 
 .abyssfin-sheet-overview {
@@ -554,21 +583,29 @@ header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child:hover
     transform: scale(1.06) !important;
 }
 
-/* Top-Right Unified Floating Glass Pill */
+/* Top-Right Unified Floating Glass Pill (Seamless Single Capsule) */
 html.sleekfin-header-mounted [data-sleekfin-header-toolbar]::after,
-html.sleekfin-header-mounted [data-sleekfin-header-toolbar][data-sleekfin-header-measured="true"]::after {
+html.sleekfin-header-mounted [data-sleekfin-header-toolbar][data-sleekfin-header-measured="true"]::after,
+[data-sleekfin-header-toolbar]::after,
+[data-sleekfin-legacy-cluster] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     content: none !important;
     display: none !important;
     opacity: 0 !important;
 }
 
+/* 1. Left side of capsule: Navigation tabs */
 header.MuiAppBar-root > .MuiToolbar-root > .MuiStack-root:first-of-type {
     align-items: center !important;
     background: rgba(20, 20, 24, 0.75) !important;
     background-color: rgba(20, 20, 24, 0.75) !important;
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-right: none !important;
     border-radius: 50px 0 0 50px !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
@@ -578,20 +615,46 @@ header.MuiAppBar-root > .MuiToolbar-root > .MuiStack-root:first-of-type {
     height: 44px !important;
     left: auto !important;
     margin: 0 0 0 auto !important;
-    padding: 0 8px 0 14px !important;
+    padding: 0 6px 0 14px !important;
     position: static !important;
     transform: none !important;
     z-index: 10 !important;
 }
 
+/* 2. Middle of capsule: Cast, SyncPlay, Search actions */
+header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:not(:last-child) {
+    align-items: center !important;
+    background: rgba(20, 20, 24, 0.75) !important;
+    background-color: rgba(20, 20, 24, 0.75) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-grow: 0 !important;
+    gap: 2px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 4px !important;
+    z-index: 10 !important;
+}
+
+/* 3. Right side of capsule: Profile avatar */
 header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:last-child {
     align-items: center !important;
     background: rgba(20, 20, 24, 0.75) !important;
     background-color: rgba(20, 20, 24, 0.75) !important;
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: none !important;
     border-radius: 0 50px 50px 0 !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
     box-sizing: border-box !important;
@@ -601,7 +664,7 @@ header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:last-child {
     margin-left: 0 !important;
     margin-right: 0 !important;
     order: initial !important;
-    padding: 0 12px 0 6px !important;
+    padding: 0 12px 0 4px !important;
     z-index: 10 !important;
 }
 

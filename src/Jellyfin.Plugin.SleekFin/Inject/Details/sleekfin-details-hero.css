@@ -61,10 +61,14 @@ html.sleekfin-details-mounted #itemDetailPage .detailPageSecondaryContainer {
     padding-left: 0 !important;
 }
 
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::after,
-#itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
-#itemDetailPage[data-sleekfin-details] #itemBackdrop::after {
+html.sleekfin-details-mounted #itemDetailPage #itemBackdrop::before,
+html.sleekfin-details-mounted #itemDetailPage #itemBackdrop::after,
+html.sleekfin-details-mounted .itemBackdrop::before,
+html.sleekfin-details-mounted .itemBackdrop::after,
+#itemDetailPage #itemBackdrop::before,
+#itemDetailPage #itemBackdrop::after,
+.itemBackdrop::before,
+.itemBackdrop::after {
     content: "";
     inset: 0;
     pointer-events: none;
@@ -72,13 +76,17 @@ html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdr
     z-index: 1;
 }
 
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::before,
-#itemDetailPage[data-sleekfin-details] #itemBackdrop::before {
+html.sleekfin-details-mounted #itemDetailPage #itemBackdrop::before,
+html.sleekfin-details-mounted .itemBackdrop::before,
+#itemDetailPage #itemBackdrop::before,
+.itemBackdrop::before {
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.62) 22%, rgba(0, 0, 0, 0.28) 46%, transparent 72%) !important;
 }
 
-html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #itemBackdrop::after,
-#itemDetailPage[data-sleekfin-details] #itemBackdrop::after {
+html.sleekfin-details-mounted #itemDetailPage #itemBackdrop::after,
+html.sleekfin-details-mounted .itemBackdrop::after,
+#itemDetailPage #itemBackdrop::after,
+.itemBackdrop::after {
     background: linear-gradient(180deg, transparent 0%, transparent 35%, rgba(0, 0, 0, 0.18) 50%, rgba(0, 0, 0, 0.52) 66%, rgba(0, 0, 0, 0.88) 82%, #000000 100%) !important;
 }
 

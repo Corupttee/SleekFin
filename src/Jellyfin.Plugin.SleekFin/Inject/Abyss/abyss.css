@@ -442,9 +442,28 @@ header.MuiAppBar-root>.MuiToolbar-root>.MuiStack-root:first-of-type {
     background: rgba(var(--abyss-glass-tint), 0.75) !important;
     backdrop-filter: blur(var(--abyss-glass-blur)) !important;
     -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-right: none !important;
     padding: 3px 6px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:not(:last-child) {
+    display: flex !important;
+    align-items: center !important;
+    flex-grow: 0 !important;
+    margin: 0 !important;
+    padding: 3px 4px !important;
+    background: rgba(var(--abyss-glass-tint), 0.75) !important;
+    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
 }
 
@@ -497,8 +516,10 @@ header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:last-child {
     background: rgba(var(--abyss-glass-tint), 0.75) !important;
     backdrop-filter: blur(var(--abyss-glass-blur)) !important;
     -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-left: none !important;
     padding: 3px 8px !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
 }

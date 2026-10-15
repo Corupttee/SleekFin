@@ -120,9 +120,18 @@
     width: 40px;
 }
 
+.sleekfin-details-stack > .mainDetailButtons > .detailButton:not(.sleekfin-button) :is(.detailButton-text, .detailButton-icon-text, span:not(.material-icons):not(.sleekfin-icon)) {
+    display: none !important;
+}
+
 .sleekfin-details-stack > .mainDetailButtons .detailButton-content {
     flex-direction: row !important;
     height: auto;
+}
+
+.sleekfin-details-stack > .mainDetailButtons .sleekfin-button {
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .sleekfin-details-stack > .mainDetailButtons .sleekfin-button .detailButton-content .material-icons {

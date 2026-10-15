@@ -30,10 +30,17 @@ function CheckIcon() {
   );
 }
 
-function ThumbsUpIcon() {
+function HeartIcon({ filled = false }) {
+  if (filled) {
+    return (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+      </svg>
+    );
+  }
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
     </svg>
   );
 }
@@ -308,7 +315,7 @@ function calculateDesktopPosition(cardRect) {
 
 export function CardPreviewPopOver({ item: mediaItem, meta, position, onEnter, onLeave, onClose }) {
   const [favorite, setFavorite] = useState(meta.isFavorite);
-  const [liked, setLiked] = useState(false);
+  const [played, setPlayed] = useState(meta.isPlayed);
 
   return (
     <div
@@ -375,26 +382,26 @@ export function CardPreviewPopOver({ item: mediaItem, meta, position, onEnter, o
 
           <button
             type="button"
-            class={`abyssfin-btn-action ${favorite ? 'is-active' : ''}`}
-            title={favorite ? 'In Watchlist' : 'Add to Watchlist'}
+            class={`abyssfin-btn-action ${played ? 'is-active' : ''}`}
+            title={played ? 'Watched' : 'Mark as Watched'}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMediaPlayed(mediaItem, setPlayed);
+            }}
+          >
+            {played ? <CheckIcon /> : <PlusIcon />}
+          </button>
+
+          <button
+            type="button"
+            class={`abyssfin-btn-action ${favorite ? 'is-favorite is-active' : ''}`}
+            title={favorite ? 'In favourites' : 'Add to favourites'}
             onClick={(e) => {
               e.stopPropagation();
               toggleMediaFavorite(mediaItem, setFavorite);
             }}
           >
-            {favorite ? <CheckIcon /> : <PlusIcon />}
-          </button>
-
-          <button
-            type="button"
-            class={`abyssfin-btn-action ${liked ? 'is-liked' : ''}`}
-            title="Like"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLiked(!liked);
-            }}
-          >
-            <ThumbsUpIcon />
+            <HeartIcon filled={favorite} />
           </button>
 
           <button
@@ -487,11 +494,11 @@ export function CardPreviewBottomSheet({ item: mediaItem, meta, onClose }) {
         <div class="abyssfin-sheet-actions">
           <button
             type="button"
-            class={`abyssfin-sheet-icon-btn ${favorite ? 'is-active' : ''}`}
+            class={`abyssfin-sheet-icon-btn ${favorite ? 'is-active is-favorite' : ''}`}
             onClick={() => toggleMediaFavorite(mediaItem, setFavorite)}
           >
-            {favorite ? <CheckIcon /> : <PlusIcon />}
-            <span>Watchlist</span>
+            <HeartIcon filled={favorite} />
+            <span>{favorite ? 'In favourites' : 'Favourites'}</span>
           </button>
 
           <button
