@@ -10,6 +10,15 @@
     "repositoryUrl": "https://github.com/Corupttee/SleekFin",
     "versions": [
       {
+        "version": "1.5.6.0",
+        "changelog": "fix dashboard sidebar width, add collapse/expand toggle and full-width layout",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/Corupttee/SleekFin/releases/download/1.5.6.0/Jellyfin.Plugin.SleekFin_10.11.0.zip",
+        "checksum": "BB875709B521EC4EDA33B92E746E3316",
+        "timestamp": "2026-10-15T17:39:23.0000000Z",
+        "dependencies": []
+      },
+      {
         "version": "1.5.5.0",
         "changelog": "eliminate double header, fix details layout and offsets, remove red accents, and fix home hero host",
         "targetAbi": "10.11.0.0",
