@@ -23,18 +23,24 @@ html.sleekfin-media-mounted.sleekfin-header-mounted :is(#moviesPage, #tvshowsPag
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root {
+    align-items: center;
     box-sizing: border-box;
     color: var(--sleekfin-text);
+    display: flex;
     font-family: var(--sleekfin-font-family);
+    gap: 12px;
     min-height: 48px;
     padding-inline: var(--sleekfin-page-gutter) !important;
     pointer-events: auto;
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root > button:first-child {
+    align-items: center;
+    align-self: center;
     background: transparent;
     border-radius: 8px;
     color: var(--sleekfin-text);
+    display: inline-flex;
     gap: 10px;
     min-width: 0;
     padding: 4px 6px 4px 0;
@@ -71,7 +77,10 @@ html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolb
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButtonGroup-root {
+    align-items: center;
     border-radius: 8px;
+    display: inline-flex;
+    gap: 8px;
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButton-root {
@@ -81,13 +90,29 @@ html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolb
     transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
+html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButtonGroup-root .MuiButton-root {
+    border-radius: 50px !important;
+}
+
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButton-contained {
     background: var(--sleekfin-text);
-    color: var(--sleekfin-background);
+    color: #000;
+    font-weight: 600;
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButton-contained:hover {
     background: #fff;
+}
+
+/* Only the leading Play-all pill stays white; shuffle and siblings use glass. */
+html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButtonGroup-root .MuiButton-root:not(:first-child) {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    color: #fff !important;
+}
+
+html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButtonGroup-root .MuiButton-root:not(:first-child):hover {
+    background: rgba(255, 255, 255, 0.22) !important;
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root .MuiButton-text {
