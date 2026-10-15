@@ -106,7 +106,7 @@ jobs:
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "9.0.x"
 
       - uses: actions/setup-node@v4
         with:
@@ -134,7 +134,7 @@ jobs:
           CHANGELOG: ${{ needs.extract-version.outputs.changelog }}
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          OUT_DIR="${GITHUB_WORKSPACE}/src/Jellyfin.Plugin.SleekFin/bin/Release/net8.0"
+          OUT_DIR="${GITHUB_WORKSPACE}/src/Jellyfin.Plugin.SleekFin/bin/Release/net9.0"
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.0000000Z")
           ZIP_NAME="${{ steps.jellyfin.outputs.zip_name }}"
           DIST_DIR="${GITHUB_WORKSPACE}/dist"
