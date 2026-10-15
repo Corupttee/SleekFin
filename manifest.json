@@ -1,0 +1,329 @@
+[
+  {
+    "guid": "da36c4ef-1d10-4169-8a68-26b194d5301a",
+    "name": "SleekFin",
+    "description": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
+    "overview": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
+    "owner": "varunaditya-plus",
+    "category": "General",
+    "imageUrl": "https://raw.githubusercontent.com/varunaditya-plus/SleekFin/main/thumb.png",
+    "repositoryUrl": "https://github.com/varunaditya-plus/SleekFin",
+    "versions": [
+      {
+        "version": "1.5.1.0",
+        "changelog": "Added optional muted trailer backgrounds to hero section on detail pages which support local, remote and YouTube trailers. Added the option to the Hero UI Builder under “Artwork + Trailer”. Also made all builder sections start collapsed. Changes by @T9es and @varunaditya-plus",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.5.1.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "530B2131F92B4ABE3E53E6D50F1AE853",
+        "timestamp": "2026-10-07T23:10:03.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.5.0.0",
+        "changelog": "Updated detail actions and expanded the Info modal to have media settings, credits, IMDb/TMDB links, availability and tags. Added circular Jellyfin Enhanced buttons, reskinned Jellyfin dialogs, SleekFin-style \"More\" menus, configurable dropdowns, optional season posters instead of dropdowns to change the current season. Also updated episode/season card controls, added audio languages to hero info. Also improved availability refreshes and provider lists",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.5.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "602B7864318F16E0B6B9FF3A2159C188",
+        "timestamp": "2026-10-06T21:39:17.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.5.0",
+        "changelog": "Accent color is now configurable in settings. Also collapsed settings into a \"General options\" section as there aren't many",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.5.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "A8DB6A4D7A50A5ABEB1046F3485CB0EB",
+        "timestamp": "2026-10-06T04:59:54.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.4.0",
+        "changelog": "Replaced episode number labels with badges",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.4.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "6501141407343B124467267BB2BC1E54",
+        "timestamp": "2026-10-06T04:48:45.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.3.4",
+        "changelog": "Fixed heading text sizing for Seasons, Seerr row headings, and other headings",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.3.4/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "8FEAE437F39431BE78D77199455D7FD6",
+        "timestamp": "2026-10-06T04:12:10.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.3.3",
+        "changelog": "Fixed detail row arrows and made all row clipping on detail pages the same",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.3.3/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "FFC9914CF21A4BC7BD95C0A80B90ECCC",
+        "timestamp": "2026-10-06T03:39:38.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.3.2",
+        "changelog": "Fixed video not showing on Jellium Desktop",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.3.2/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "1F58B6F20E99A487C7F2BB6D9212152E",
+        "timestamp": "2026-10-06T03:02:57.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.3.1",
+        "changelog": "Moved back button on detail pages into header, removed black area under header, and raised detail content appropriately. Also removed show more/less row in hero sections and replaced it with the text being able to be collapsed/uncollapsed on click",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.3.1/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "805F55C5B845D5AA4898FA9CF4AA1FD1",
+        "timestamp": "2026-10-04T22:58:04.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.3.0",
+        "changelog": "Restored dropdowns for version, video, audio and subtitles in a compact media settings modal. Synchronised selections with Jellyfin playback and refreshed details safely when switching versions. Added a “Use custom SleekFin dropdown” option in configuration to show custom season and media setting dropdowns (default is to use native dropdown). Also removed duplicate Play/Resume buttons, reordered actions to Play/Resume, Download and Add to watchlist with a ⋮ settings button for media settings modal. Also simplified duplicated picker code and lifecycle cleanup. Changes by @T9es and @varunaditya-plus",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.3.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "87699C069EEF5AB54D1D201A2938B2EB",
+        "timestamp": "2026-10-04T20:36:08.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.2.5",
+        "changelog": "Simplified per-history-entry scroll restoration and reused Jellyfin’s native Play/Resume updates while keeping episode action suppression",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.2.5/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "0759BF25FAB8BCD70D2D124F080937A0",
+        "timestamp": "2026-10-04T09:50:23.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.2.4",
+        "changelog": "Corrected the Resume label on item detail pages for items with no playback position. Changes by @T9es",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.2.4/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "EBFF2587A5C5FBDF22A93EBBFD146C79",
+        "timestamp": "2026-10-03T21:38:37.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.2.3",
+        "changelog": "Restored scroll position when navigating to previous pages per history entry (going back/forwards). Changes by @T9es",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.2.3/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "DFCFD1DBF40BF4751A23E945371CD6F0",
+        "timestamp": "2026-10-03T21:33:44.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.2.2",
+        "changelog": "Fixed SleekFin styling on SeerrFin tabs in Modern layout",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.2.2/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "1519D84CE4EFEEFC0659D363ED6BC9FB",
+        "timestamp": "2026-10-03T10:43:43.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.2.1",
+        "changelog": "On dashboard and video playback pages, don't show custom header",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.2.1/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "13B02D10F4FE06E843A6A6897CDCAACB",
+        "timestamp": "2026-10-03T10:05:01.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.2.0",
+        "changelog": "Added optional styled season picker. Changes by @T9es",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.2.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "D24A6C880A16823978577D8569D2D172",
+        "timestamp": "2026-09-29T10:34:09.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.1.0",
+        "changelog": "Updated header bar to show on all the same pages the modern headers shows on",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.1.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "C2E22D0C133FD735DC1BA9914788B2BD",
+        "timestamp": "2026-09-26T21:06:43.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.4.0.0",
+        "changelog": "Improve Jellyfin Enhanced integration by reskinning their components to stay consistant with the design style",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.4.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "4CCB0E51602F1EC438F69E9AA6533822",
+        "timestamp": "2026-09-26T10:18:28.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.3.0.1",
+        "changelog": "Hid duplicate MediaBar carousel and cleared Home Screen Sections gap. Changes by @T9es",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.3.0.1/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "1E0E5976A4B71D826002387460E9408A",
+        "timestamp": "2026-09-25T22:19:48.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.3.0.0",
+        "changelog": "Added hero carousel customization to the UI Builder to allow users to precisely customize the hero carousel to their liking, letting them change how many slides there are, how the title and buttons look, and even how the transition looks",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.3.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "3CD7DFCD5000DFDED7DE678024E935DE",
+        "timestamp": "2026-09-19T22:23:59.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.2.2.0",
+        "changelog": "Prevented stark layout changing by reserving header and hero geometry, adding hero/detail page skeletons/fade across home, improving SPA remount and failure cleanup, and removing redundant loading state/css",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.2.2.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "76D5C5D4AD81EC6D8629E9CBDD9702C9",
+        "timestamp": "2026-09-19T14:28:02.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.2.1.3",
+        "changelog": "Prevented endless content page loading when opening pages from home posters",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.2.1.3/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "0974887460EB7CF73BC4D367ACB1636C",
+        "timestamp": "2026-09-19T12:12:43.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.2.1.2",
+        "changelog": "Update default jellyfin spinner and media control styling to match SleekFin. Changes by @Tim-Unger",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.2.1.2/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "E11F686B0C1424DFB13377639E060648",
+        "timestamp": "2026-09-19T11:18:18.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.2.1.1",
+        "changelog": "Prevent native detail flashes and add a native detail option. Changes by @T9es",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.2.1.1/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "883F99F4E35B8445F127C25085C8427E",
+        "timestamp": "2026-09-19T10:52:37.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.2.1.0",
+        "changelog": "Added responsive header overflow dropdown/drawer, mobile dock behavior, drag-and-drop editing, and improved Jellyfin, SeerrFin, and Jellyfin Enhanced header integration",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.2.1.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "82B39296D9A206CDA463692589F0C634",
+        "timestamp": "2026-09-13T20:49:00.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.2.0.0",
+        "changelog": "Added header customization in the new UI Builder tab in config. Also added draggable elements from Jellyfin, Seerrfin, and Jellyfin Enhanced which can be added to the header bar",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.2.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "05AD0AF8608BFADE1FF998B03441D9FF",
+        "timestamp": "2026-09-13T12:48:30.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.1.1.0",
+        "changelog": "Restored artwork in \"You may like\" section, accurate metadata, and added better row density. Changes by @T9es",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.1.1.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "8A638F6E47074DD44515D7C918F53D3E",
+        "timestamp": "2026-09-13T09:08:58.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.1.0.2",
+        "changelog": "Stopped the background container from covering video playback",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.1.0.2/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "FA65FA51238CD7CD3636D0B8D736CBC1",
+        "timestamp": "2026-09-12T22:02:01.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.1.0.1",
+        "changelog": "Fixed help link to go to correct github link",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.1.0.1/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "9313CDEE12C3659398406AC88EE0462A",
+        "timestamp": "2026-09-12T19:51:12.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.1.0.0",
+        "changelog": "Reorganized the frontend into compact Preact modules, seperated js/css files each for different elements, removed redundant runtime logic, and made it so frontend bundles are generated through the .NET build",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.1.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "DF2E0189EED1D274D8FEA19890F53CF1",
+        "timestamp": "2026-09-12T14:42:16.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "1.0.0.0",
+        "changelog": "Finished the complete UI redesign with a global black and red theme, shared icons and reusable UI components, responsive media rows with enriched metadata, redesigned Movie, Series, Season, and Episode detail pages with full-page backdrop heroes, refactored home hero controls, updated Readme, SleekFin branding and icons",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/1.0.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "5A5200696365421B56631CA9932EBE1C",
+        "timestamp": "2026-09-12T00:21:19.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "0.2.0.1",
+        "changelog": "Added a css fix to jellyfin's top padding problem where the hero would start a bit lower than it was supposed to",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/0.2.0.1/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "1A6E3BE5A4464D068E3C84FA24FA417E",
+        "timestamp": "2026-09-11T19:33:49.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "0.2.0.0",
+        "changelog": "Added full-width hero section at the top of home page with customizable content sources, fixed manifest",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/0.2.0.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "F8F0B70D135D396A3E65AAE7A4D391D3",
+        "timestamp": "2026-09-11T18:06:13.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "0.1.2.0",
+        "changelog": "Update active controls logic for better navigation. This is the first published release due to the branch being \"master\" instead of \"main\" for some reason.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/varunaditya-plus/SleekFin/releases/download/0.1.2.0/Jellyfin.Plugin.SleekFin_12.0.0.zip",
+        "checksum": "5B8AA7D4118F86BA72CF1A3E1601A2A2",
+        "timestamp": "2026-09-11T16:43:47.0000000Z",
+        "dependencies": []
+      },
+      {
+        "version": "0.1.1.0",
+        "changelog": "Updated header logic to use href of links instead of specific paths, so SeerrFin/JE links work",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "",
+        "checksum": "",
+        "timestamp": "",
+        "dependencies": []
+      },
+      {
+        "version": "0.1.0.0",
+        "changelog": "Added a custom header bar putting the server logo on the left and all tabs and the rest in a navbar on the right",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "",
+        "checksum": "",
+        "timestamp": "",
+        "dependencies": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,278 @@
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] .detailPageSecondaryContainer {
+    box-sizing: border-box;
+    padding: 0 var(--sleekfin-page-gutter) 72px !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] :is(.detailVerticalSection, .jellyseerr-details-section) {
+    margin: 36px 0 0 !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] #similarCollapsible {
+    margin: 56px 0 0 !important;
+}
+
+.sleekfin-details-section-heading[hidden] {
+    display: none !important;
+}
+
+.sleekfin-details-section-heading {
+    margin-bottom: 20px;
+}
+
+.sleekfin-details-section-heading > .sleekfin-section-copy {
+    flex: 1;
+}
+
+.sleekfin-details-section-heading .sectionTitle {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details].sleekfin-details-has-episodes[data-sleekfin-item-type="Series"]:not(.sleekfin-details-season-posters) #childrenContent,
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details].sleekfin-details-has-episodes[data-sleekfin-item-type="Season"] #listChildrenCollapsible,
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details].sleekfin-details-has-episodes[data-sleekfin-item-type="Episode"] .moreFromSeasonSection {
+    display: none !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details].sleekfin-details-has-episodes[data-sleekfin-item-type="Series"]:not(.sleekfin-details-season-posters) #listChildrenCollapsible {
+    margin: 0 !important;
+}
+
+.sleekfin-details-season-actions {
+    margin: 24px 0 0;
+}
+
+.sleekfin-details-season-actions .sleekfin-section-rail,
+.sleekfin-details-season-actions .sectionTitle > span {
+    display: none;
+}
+
+.sleekfin-details-season-actions .sectionTitle > button {
+    margin-left: 0 !important;
+}
+
+/* Native card widths include an outer margin; leave room for Play and the three 32px actions. */
+.sleekfin-details-season-card.card {
+    min-width: calc(166px + 1.2em);
+}
+
+.sleekfin-details-season-card .cardBox {
+    position: relative;
+}
+
+.sleekfin-details-season-card .cardOverlayContainer {
+    background: transparent;
+    opacity: 1;
+}
+
+.sleekfin-details-season-card-actions,
+.sleekfin-details-season-card .cardOverlayContainer > .cardOverlayButton-br {
+    bottom: auto;
+    display: flex;
+    gap: 4px;
+    left: auto;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+}
+
+.sleekfin-details-season-card.card :is(.cardOverlayButton, .je-hide-btn),
+.sleekfin-details-season-card.card :is(.cardOverlayButton, .je-hide-btn):hover {
+    border-radius: 12px;
+    color: var(--sleekfin-muted);
+    height: 32px;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    transform: none;
+    width: 32px;
+}
+
+.sleekfin-details-season-card.card :is(.cardOverlayButton, .je-hide-btn):hover {
+    color: var(--sleekfin-text);
+}
+
+.sleekfin-details-season-card :is(.cardOverlayButton, .je-hide-btn) .material-icons {
+    font-size: 18px;
+    transform: none;
+}
+
+.sleekfin-details-season-card .cardOverlayButton.sleekfin-details-season-card-play {
+    bottom: auto;
+    left: 10px;
+    position: absolute;
+    right: auto;
+    top: 10px;
+    z-index: 2;
+}
+
+/* Jellyfin's hover icons have important sizing and a second circular background. */
+.sleekfin-details-season-card .cardOverlayButtonIcon {
+    background-color: transparent !important;
+    font-size: 18px !important;
+    height: 18px !important;
+    width: 18px !important;
+}
+
+.sleekfin-details-season-card .cardIndicators {
+    bottom: 10px;
+    top: auto;
+}
+
+.sleekfin-details-season-card .playedIndicator {
+    display: none;
+}
+
+.sleekfin-details-season-card .je-hide-btn {
+    left: 10px;
+    right: auto;
+    top: 52px;
+}
+
+.sleekfin-details-season-link {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    display: block;
+    font: inherit;
+    padding: 0;
+    text-align: inherit;
+    width: 100%;
+}
+
+html.layout-tv .sleekfin-details-season-card:focus-within .cardScalable {
+    border-color: var(--sleekfin-accent) !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] .detailVerticalSection .cardScalable {
+    background: var(--sleekfin-surface);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--sleekfin-card-radius, 20px) !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] .detailVerticalSection :is(.cardContent, .cardImageContainer, .blurhash-canvas, .cardPadder) {
+    border-radius: var(--sleekfin-card-radius, 20px) !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] .detailVerticalSection .cardText {
+    color: var(--sleekfin-text);
+    font-family: var(--sleekfin-font-family);
+}
+
+html.sleekfin-details-mounted #itemDetailPage[data-sleekfin-details] .detailVerticalSection .cardText-secondary {
+    color: var(--sleekfin-muted);
+}
+
+html.sleekfin-details-mounted :is(#castCollapsible, #similarCollapsible) > [is="emby-scroller"] {
+    overflow-y: hidden;
+    padding: 0 !important;
+}
+
+html.sleekfin-details-mounted :is(#castCollapsible, #similarCollapsible) > [is="emby-scroller"]:not(.scrollX) {
+    overflow-x: hidden;
+}
+
+html.sleekfin-details-mounted :is(#castCollapsible, #similarCollapsible) > .emby-scrollbuttons {
+    padding-right: 0 !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible #castContent {
+    display: flex;
+    padding: 0 0 10px !important;
+}
+
+/* Abyss-style Cast Thumbnails */
+html.sleekfin-details-mounted #castCollapsible .card {
+    box-sizing: border-box;
+    flex: 0 0 clamp(130px, 10vw, 175px);
+    padding-inline-end: 14px;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    width: clamp(130px, 10vw, 175px) !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible .card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+html.sleekfin-details-mounted #castCollapsible .card:hover .cardScalable {
+    border-color: rgba(255, 255, 255, 0.24) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+}
+
+html.sleekfin-details-mounted :is(#castCollapsible, #similarCollapsible) .cardBox {
+    margin: 0 !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible .cardPadder {
+    background-color: transparent !important;
+    border-radius: 18px !important;
+    padding-bottom: 138% !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible .cardScalable {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible .cardOverlayContainer {
+    background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.6));
+    border-radius: 18px !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible .cardText {
+    font: 600 13px/18px var(--sleekfin-font-family);
+    padding: 8px 2px 0;
+    text-align: start !important;
+}
+
+html.sleekfin-details-mounted #castCollapsible .cardText-secondary {
+    color: var(--sleekfin-muted);
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.8;
+    padding-top: 2px;
+}
+
+html.sleekfin-details-mounted #castCollapsible .cardText a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Abyss-style List Item Episodes on Item Detail Page */
+html.sleekfin-details-mounted #itemDetailPage .listItem {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--sleekfin-card-radius, 20px) !important;
+    margin-bottom: 8px !important;
+    padding: 10px 16px !important;
+    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+html.sleekfin-details-mounted #itemDetailPage .listItem:hover {
+    background: rgba(245, 245, 247, 0.96) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    color: #121212 !important;
+    transform: translateY(-2px);
+}
+
+html.sleekfin-details-mounted #itemDetailPage .listItem:hover :is(p, span, div, bdi, .secondary, .listItem-secondaryText, .listItem-overview, .material-icons, .listItemImageButton) {
+    color: #121212 !important;
+}
+
+html.sleekfin-details-mounted #itemDetailPage .listItem .listItemImage,
+html.sleekfin-details-mounted #itemDetailPage .listItem .listItemImageButton {
+    border-radius: 14px !important;
+}
+
+@media (max-width: 767px) {
+    html.sleekfin-details-mounted #castCollapsible .card {
+        flex-basis: 140px;
+        width: 140px !important;
+    }
+}

@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <JellyfinVersion>12.0.0</JellyfinVersion>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <Version>1.5.2.0</Version>
+        <RootNamespace>Jellyfin.Plugin.SleekFin</RootNamespace>
+        <FrontendRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/../..'))</FrontendRoot>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Jellyfin.Common" Version="$(JellyfinVersion)">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="Jellyfin.Model" Version="$(JellyfinVersion)">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="Jellyfin.Controller" Version="$(JellyfinVersion)">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Configuration\config.html" />
+        <EmbeddedResource Include="Inject\**\*.css" />
+        <EmbeddedResource Include="Inject\**\*.js" Exclude="Inject\Build\*.js" />
+        <EmbeddedResource Include="Inject\Fonts\*.woff2" />
+    </ItemGroup>
+
+    <Target Name="InstallFrontendDependencies"
+            Inputs="$(FrontendRoot)/package.json;$(FrontendRoot)/package-lock.json"
+            Outputs="$(FrontendRoot)/node_modules/.package-lock.json"
+            Condition="'$(DesignTimeBuild)' != 'true'">
+        <Exec WorkingDirectory="$(FrontendRoot)" Command="npm ci" />
+    </Target>
+
+    <Target Name="BuildFrontend"
+            BeforeTargets="PrepareForBuild"
+            DependsOnTargets="InstallFrontendDependencies"
+            Condition="'$(DesignTimeBuild)' != 'true'">
+        <Exec WorkingDirectory="$(FrontendRoot)" Command="npm run build" />
+        <ItemGroup>
+            <EmbeddedResource Include="Inject\Build\*.js" />
+        </ItemGroup>
+    </Target>
+
+    <ItemGroup>
+        <None Include="..\..\meta.json" Link="meta.json" CopyToOutputDirectory="Always" />
+        <None Include="..\..\thumb.png" Link="thumb.png" CopyToOutputDirectory="Always" />
+    </ItemGroup>
+
+</Project>

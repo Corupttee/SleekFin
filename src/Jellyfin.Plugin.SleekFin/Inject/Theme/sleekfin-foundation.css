@@ -1,0 +1,49 @@
+html.sleekfin-main-ui:not(.transparentDocument),
+html.sleekfin-main-ui:not(.transparentDocument) body,
+html.sleekfin-main-ui .nowPlayingPlaylist,
+html.sleekfin-main-ui .wizardStartForm,
+html.sleekfin-main-ui .dialog {
+    background-color: var(--sleekfin-background) !important;
+    background-image: none !important;
+}
+
+html.sleekfin-main-ui .collapseContent,
+html.sleekfin-main-ui .formDialogFooter:not(.formDialogFooter-clear),
+html.sleekfin-main-ui .formDialogHeader:not(.formDialogHeader-clear),
+html.sleekfin-main-ui .visualCardBox,
+html.sleekfin-main-ui .cardBox:not(.visualCardBox) .cardPadder {
+    background-color: var(--jf-palette-background-paper) !important;
+}
+
+html.sleekfin-main-ui .paperList {
+    background-color: var(--jf-palette-background-paper) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--sleekfin-card-radius, 20px) !important;
+    overflow: hidden;
+}
+
+html.sleekfin-main-ui :is(.emby-input, .emby-textarea, .emby-select) {
+    background: rgba(20, 20, 24, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 10px !important;
+    color: var(--sleekfin-text) !important;
+    font-family: var(--sleekfin-font-family);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+html.sleekfin-main-ui :is(.emby-input:focus, .emby-textarea:focus, .emby-select:focus) {
+    border-color: var(--sleekfin-accent) !important;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+html.sleekfin-main-ui .checkboxOutline {
+    border-radius: 6px !important;
+}
+
+html.sleekfin-main-ui :is(.button-submit, .raised:not(.homeLibraryButton)) {
+    border-radius: 12px !important;
+}
+
+html.sleekfin-main-ui .cardPadder .cardImageIcon {
+    color: var(--jf-palette-background-paper) !important;
+}

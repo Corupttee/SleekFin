@@ -1,0 +1,177 @@
+/* SleekFin Player - Frosted Glass Floating OSD and Media Controls */
+
+.videoOsdBottom {
+    background: none !important;
+    box-sizing: border-box;
+    margin: 24px !important;
+    padding: 0 !important;
+}
+
+.videoOsdBottom .osdControls,
+.nowPlayingBar {
+    background-color: rgba(20, 20, 24, 0.78) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+    backdrop-filter: blur(18px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: var(--sleekfin-player-radius, 24px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+    padding: 12px 18px !important;
+}
+
+.nowPlayingBar .nowPlayingImage {
+    border-radius: 8px;
+    width: 2.91em;
+}
+
+.nowPlayingBarPositionContainer {
+    padding: 0 8px;
+    top: -1.5em;
+}
+
+.nowPlayingBarInfoContainer {
+    margin-left: 8px;
+}
+
+/* Player Slider & Chapter Markers */
+#videoOsdPage .sliderMarker {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    pointer-events: none;
+    width: 3px;
+}
+
+#videoOsdPage .sliderMarker.watched {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.videoOsdBottom .mdl-slider-background-lower {
+    background-color: var(--sleekfin-accent) !important;
+}
+
+.videoOsdBottom .mdl-slider::-webkit-slider-thumb,
+.videoOsdBottom .mdl-slider::-moz-range-thumb {
+    background: var(--sleekfin-accent) !important;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 150ms ease;
+}
+
+.videoOsdBottom .mdl-slider::-webkit-slider-thumb:hover,
+.videoOsdBottom .mdl-slider::-moz-range-thumb:hover {
+    transform: scale(1.25);
+}
+
+.videoOsdBottom :is(.mdl-slider-background-flex, .mdl-slider-background-flex-inner, .mdl-slider-background-upper, .mdl-slider-background-lower) {
+    border-radius: 3px;
+    height: 4px;
+}
+
+.sliderBubble {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background: rgba(20, 20, 24, 0.88) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: var(--sleekfin-text);
+    font-size: 12px;
+    padding: 4px 8px;
+    transform: translate3d(-50%, -108%, 0);
+}
+
+/* Chapter Thumbnails */
+.chapterThumbContainer,
+.chapterThumb {
+    border-radius: 16px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.chapterThumbTextContainer {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.65) !important;
+    border-radius: 10px;
+    bottom: 4px;
+    padding: 0.25em 0.7em;
+}
+
+/* Player Time & Typography */
+.startTimeText,
+.endTimeText,
+.nowPlayingBarCurrentTime {
+    color: rgba(241, 242, 244, 0.85);
+    font-family: var(--sleekfin-font-family);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.osdTimeText {
+    margin-left: 0 !important;
+    opacity: 0.6;
+}
+
+/* Player Buttons & Hover State */
+.videoOsdBottom .paper-icon-button-light {
+    border-radius: 50%;
+    color: var(--sleekfin-text);
+    margin: 0 2px;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.videoOsdBottom .paper-icon-button-light:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    transform: scale(1.08);
+}
+
+.osdPoster img {
+    border: none;
+    border-radius: var(--sleekfin-card-radius, 20px);
+}
+
+/* Top OSD Title & Header Badge */
+body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1,
+#videoOsdPage .pageTitle {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background: rgba(20, 20, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    color: var(--sleekfin-text);
+    font-family: var(--sleekfin-font-family);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 16px;
+}
+
+/* Player Menus, Track Selectors & Quality Dialogs */
+.trackSelections .selectContainer {
+    align-items: center;
+}
+
+.trackSelections .selectContainer .detailTrackSelect {
+    padding: 0.5em 1.9em 0.5em 0.5em;
+}
+
+#videoOsdPage ~ .dialog,
+#videoOsdPage ~ .actionSheetContent,
+.videoOsdBottom ~ .actionSheetContent {
+    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(20px) !important;
+    background-color: rgba(20, 20, 24, 0.88) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.upNextContainer {
+    -webkit-backdrop-filter: blur(16px) !important;
+    backdrop-filter: blur(16px) !important;
+    background-color: rgba(20, 20, 24, 0.82) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.upNextDialog-countdownText {
+    color: var(--sleekfin-accent);
+}
