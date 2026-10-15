@@ -128,6 +128,8 @@ public sealed class PluginConfiguration : BasePluginConfiguration
 
     public bool DetailsEnabled { get; set; } = true;
 
+    public bool AbyssEnabled { get; set; } = true;
+
     public bool DetailsSeasonPickerEnabled { get; set; } = false;
 
     public string DropdownStyle

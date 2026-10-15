@@ -76,6 +76,7 @@ public static class TransformationPatches
         {
             FrontendAssets.Feature.Hero => true,
             FrontendAssets.Feature.Details => configuration.DetailsEnabled,
+            FrontendAssets.Feature.Abyss => configuration.AbyssEnabled,
             _ => true
         };
     }

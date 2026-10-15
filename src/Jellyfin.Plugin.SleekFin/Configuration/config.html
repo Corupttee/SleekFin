@@ -1604,6 +1604,18 @@
                             </div>
                             <div class="sleekfin-toggle-row">
                                 <div class="sleekfin-toggle-copy">
+                                    <label class="sleekfin-toggle-label" for="sleekFinAbyssEnabled">Use Abyss theme base</label>
+                                    <div class="sleekfin-field-description">Loads the full Abyss theme (MIT, AumGupta) underneath SleekFin. SleekFin's hero and detail pages are layered on top. Refresh Jellyfin after saving.</div>
+                                </div>
+                                <div class="sleekfin-toggle-actions">
+                                    <label class="sleekfin-toggle">
+                                        <input id="sleekFinAbyssEnabled" type="checkbox" checked />
+                                        <span class="sleekfin-toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="sleekfin-toggle-row">
+                                <div class="sleekfin-toggle-copy">
                                     <label class="sleekfin-toggle-label" for="sleekFinDetailsSeasonPostersEnabled">Use season posters</label>
                                     <div class="sleekfin-field-description">Show season posters instead of an episode carousel on series pages. Season and episode pages still show episodes.</div>
                                 </div>
@@ -3737,6 +3749,7 @@
                         enabledInput.checked = readValue(configuration, 'HeaderEnabled') !== false;
                         heroEnabledInput.checked = readValue(configuration, 'HeroEnabled') !== false;
                         detailsEnabledInput.checked = readValue(configuration, 'DetailsEnabled') !== false;
+document.getElementById('sleekFinAbyssEnabled').checked = readValue(configuration, 'AbyssEnabled') !== false;
                         detailsTrailerBackgroundInput.checked = readValue(configuration, 'DetailsTrailerBackgroundEnabled') === true;
                         detailsSeasonPostersInput.checked = readValue(configuration, 'DetailsSeasonPostersEnabled') === true;
                         var dropdownStyle = readValue(configuration, 'DropdownStyle');
@@ -3812,6 +3825,7 @@
                         configuration.HeaderEnabled = enabledInput.checked;
                         configuration.HeroEnabled = heroEnabledInput.checked;
                         configuration.DetailsEnabled = detailsEnabledInput.checked;
+configuration.AbyssEnabled = document.getElementById('sleekFinAbyssEnabled').checked;
                         configuration.DetailsTrailerBackgroundEnabled = detailsTrailerBackgroundInput.checked;
                         configuration.DetailsSeasonPostersEnabled = detailsSeasonPostersInput.checked;
                         configuration.DropdownStyle = dropdownStyleInput.value;

@@ -6,7 +6,8 @@ public static class FrontendAssets
     {
         Always,
         Hero,
-        Details
+        Details,
+        Abyss
     }
 
     public sealed record Asset(string FileName, string Folder, Feature RequiredFeature = Feature.Always, bool IsBlockingScript = false)
@@ -20,6 +21,7 @@ public static class FrontendAssets
 
     public static IReadOnlyList<Asset> Ordered { get; } =
     [
+        new("abyss.css", "Abyss", Feature.Abyss),
         new("sleekfin-fonts.css", "Theme"),
         new("sleekfin-tokens.css", "Theme"),
         new("sleekfin-foundation.css", "Theme"),
