@@ -10,6 +10,15 @@
     "repositoryUrl": "https://github.com/Corupttee/SleekFin",
     "versions": [
       {
+        "version": "101.0.0.0",
+        "changelog": "refine media toolbar and card preview",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/Corupttee/SleekFin/releases/download/101.0.0.0/Jellyfin.Plugin.SleekFin_10.11.0.zip",
+        "checksum": "5176DD106C237CAD904724959F0B6CC8",
+        "timestamp": "2026-10-15T20:19:15.0000000Z",
+        "dependencies": []
+      },
+      {
         "version": "100.0.0.0",
         "changelog": "update hero, card preview, media cards",
         "targetAbi": "10.11.0.0",
