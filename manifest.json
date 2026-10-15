@@ -10,6 +10,15 @@
     "repositoryUrl": "https://github.com/Corupttee/SleekFin",
     "versions": [
       {
+        "version": "1.6.1.0",
+        "changelog": "fix movie page backdrop transition, remove header ghost flaps, and fix card preview playback and bounds",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/Corupttee/SleekFin/releases/download/1.6.1.0/Jellyfin.Plugin.SleekFin_10.11.0.zip",
+        "checksum": "125705BE5F2485252EC12348A5264C2B",
+        "timestamp": "2026-10-15T18:50:26.0000000Z",
+        "dependencies": []
+      },
+      {
         "version": "1.6.0.0",
         "changelog": "fix My Media clicking glitch, smooth backdrop transition, delete card overlay buttons, and style header pill",
         "targetAbi": "10.11.0.0",
