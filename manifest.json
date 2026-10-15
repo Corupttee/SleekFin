@@ -10,15 +10,6 @@
     "repositoryUrl": "https://github.com/Corupttee/SleekFin",
     "versions": [
       {
-        "version": "16.0.0.0",
-        "changelog": "fix My Media clicking glitch, smooth backdrop transition, delete card overlay buttons, and style header pill",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/Corupttee/SleekFin/releases/download/16.0.0.0/Jellyfin.Plugin.SleekFin_10.11.0.zip",
-        "checksum": "F778BAA87B9D20E8251D8BA3295E6939",
-        "timestamp": "2026-10-15T18:20:46.0000000Z",
-        "dependencies": []
-      },
-      {
         "version": "1.5.7.0",
         "changelog": "add Netflix-style card hover preview, mobile bottom sheet, and TV focus overlay",
         "targetAbi": "10.11.0.0",

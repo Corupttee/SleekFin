@@ -497,14 +497,14 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
 }
 
 /* 5. Delete Default Card Overlay Buttons on Media Cards (Image 2) */
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayContainer,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton-centered,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayFab-primary,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton-br,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardOverlayButton-bl,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardContent-button,
-.card:is([data-type="Movie"], [data-type="Series"], [data-type="Episode"], [data-type="Trailer"]) .cardIndicators {
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardOverlayContainer,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardOverlayButton,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardOverlayButton-centered,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardOverlayFab-primary,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardOverlayButton-br,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardOverlayButton-bl,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardContent-button,
+.card:not([data-type="CollectionFolder"]):not([data-type="UserView"]):not([data-type="Folder"]):not([data-type="Person"]):not([data-type="Genre"]) .cardIndicators {
     display: none !important;
 }
 

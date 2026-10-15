@@ -232,7 +232,7 @@ jobs:
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           git tag -a "${VERSION}" -m "SleekFin ${VERSION}"
-          git push origin "${VERSION}"
+          git push origin "refs/tags/${VERSION}"
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2

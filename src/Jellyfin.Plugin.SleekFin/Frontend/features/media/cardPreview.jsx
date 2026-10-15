@@ -103,7 +103,7 @@ export function isPreviewableCard(card) {
 
   if (
     card.closest(
-      '.homeLibraryButtonContainer, .homeSectionsContainer .verticalSection:has([data-type="CollectionFolder"]), #divVirtualFolders'
+      '.homeLibraryButtonContainer, .homeSectionsContainer .verticalSection:has([data-type="CollectionFolder"]), #divVirtualFolders, .section0, .myMediaSection'
     )
   ) {
     return false;
