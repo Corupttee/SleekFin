@@ -1,14 +1,14 @@
 {
   "category": "General",
-  "changelog": "target net9.0 for Jellyfin 10.11 packages",
+  "changelog": "rename plugin to AbyssFin",
   "description": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "guid": "da36c4ef-1d10-4169-8a68-26b194d5301a",
   "name": "AbyssFin",
   "overview": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "owner": "Corupttee",
   "targetAbi": "10.11.0.0",
-  "timestamp": "2026-10-15T16:19:16.0000000Z",
-  "version": "1.5.2.0",
+  "timestamp": "2026-10-15T16:28:21.0000000Z",
+  "version": "1.5.4.0",
   "status": "Active",
   "autoUpdate": true,
   "assemblies": [
