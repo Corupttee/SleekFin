@@ -59,27 +59,42 @@ export function createHero(page) {
 
   let layerA = nativeBackdrop.querySelector('.sleekfin-details-backdrop-layer-a');
   let layerB = nativeBackdrop.querySelector('.sleekfin-details-backdrop-layer-b');
+  let vignette = nativeBackdrop.querySelector('.sleekfin-details-vignette');
+  let seam = nativeBackdrop.querySelector('.sleekfin-details-seam');
   if (!layerA) {
     layerA = dom.element('<div class="sleekfin-details-backdrop-layer sleekfin-details-backdrop-layer-a"></div>');
     layerB = dom.element('<div class="sleekfin-details-backdrop-layer sleekfin-details-backdrop-layer-b"></div>');
+    vignette = dom.element('<div class="sleekfin-details-vignette"></div>');
+    seam = dom.element('<div class="sleekfin-details-seam"></div>');
+    nativeBackdrop.prepend(seam);
+    nativeBackdrop.prepend(vignette);
     nativeBackdrop.prepend(layerB);
     nativeBackdrop.prepend(layerA);
   }
 
   let activeLayer = layerA;
   let currentBackdropUrl = '';
+  let transitionToken = 0;
 
   function transitionBackdrop(url) {
     if (!url || url === currentBackdropUrl) return;
     currentBackdropUrl = url;
+    const token = ++transitionToken;
 
     const img = new Image();
     img.onload = () => {
-      const nextLayer = activeLayer === layerA ? layerB : layerA;
+      if (token !== transitionToken || !dom.isConnected(nativeBackdrop)) return;
+      const prevLayer = activeLayer;
+      const nextLayer = prevLayer === layerA ? layerB : layerA;
+      nextLayer.classList.remove('is-active');
       nextLayer.style.backgroundImage = `url("${url.replace(/["\\]/g, '\\$&')}")`;
-      nextLayer.classList.add('is-active');
-      activeLayer.classList.remove('is-active');
-      activeLayer = nextLayer;
+      void nextLayer.offsetWidth;
+      window.requestAnimationFrame(() => {
+        if (token !== transitionToken || !dom.isConnected(nativeBackdrop)) return;
+        nextLayer.classList.add('is-active');
+        if (prevLayer !== nextLayer) prevLayer.classList.remove('is-active');
+        activeLayer = nextLayer;
+      });
     };
     img.src = url;
   }
@@ -121,12 +136,19 @@ export function createHero(page) {
     backRoot.classList.toggle('sleekfin-details-back-after-menu', dom.isVisible(menu));
     const backParent = header || hero;
     if (backRoot.parentNode !== backParent) backParent.appendChild(backRoot);
-    const source = Array.from(page.querySelectorAll('.backdropImage')).find((element) => window.getComputedStyle(element).backgroundImage !== 'none');
-    const background = source && window.getComputedStyle(source).backgroundImage;
-    if (background && background !== 'none') {
-      const match = /url\("?([^"]*)"?\)/.exec(background);
-      if (match && match[1]) transitionBackdrop(match[1]);
-      nativeBackdrop.style.backgroundImage = background;
+
+    const inlineBg = nativeBackdrop.style.backgroundImage;
+    if (inlineBg && inlineBg !== 'none') {
+      const match = /url\(["']?([^"')]+)["']?\)/.exec(inlineBg);
+      if (match && match[1] && !currentBackdropUrl) transitionBackdrop(match[1]);
+      nativeBackdrop.style.backgroundImage = 'none';
+    } else if (!currentBackdropUrl) {
+      const source = Array.from(page.querySelectorAll('.backdropImage')).find((element) => window.getComputedStyle(element).backgroundImage !== 'none');
+      const background = source && window.getComputedStyle(source).backgroundImage;
+      if (background && background !== 'none') {
+        const match = /url\(["']?([^"')]+)["']?\)/.exec(background);
+        if (match && match[1]) transitionBackdrop(match[1]);
+      }
     }
     hero.classList.toggle('sleekfin-details-has-logo', Boolean(logo && window.getComputedStyle(logo).backgroundImage !== 'none'));
   }
@@ -145,6 +167,7 @@ export function createHero(page) {
   return {
     actions,
     destroy() {
+      transitionToken += 1;
       trailerPreview.destroy();
       delete actions.dataset.sleekfinCanDownload;
       overview?.removeAttribute('title');
@@ -156,6 +179,8 @@ export function createHero(page) {
       hero.remove();
       layerA?.remove();
       layerB?.remove();
+      vignette?.remove();
+      seam?.remove();
       nativeBackdrop.style.backgroundImage = backdropOriginal;
     },
     isConnected() {

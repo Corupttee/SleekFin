@@ -82,7 +82,7 @@
 }
 
 .sleekfin-hero-badge-dot {
-    background: #e50914;
+    background: var(--sleekfin-accent, #f5f5f7);
     border-radius: 2px;
     display: inline-block;
     height: 12px;
@@ -90,9 +90,9 @@
 }
 
 .sleekfin-hero-badge-top10 {
-    background: #e50914;
+    background: var(--sleekfin-accent, #f5f5f7);
     border-radius: 4px;
-    color: #fff;
+    color: #05070a;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.04em;

@@ -430,7 +430,7 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
 }
 
 html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecommendedPage, [data-seerrfin-modern-panel]) .itemProgressBarForeground {
-    background: #e50914 !important;
+    background: var(--sleekfin-accent) !important;
     border-radius: 4px !important;
 }
 

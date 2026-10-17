@@ -430,43 +430,6 @@ header.MuiAppBar-root>.MuiToolbar-root {
     position: relative;
 }
 
-header.MuiAppBar-root>.MuiToolbar-root>.MuiStack-root:first-of-type {
-    position: static !important;
-    left: auto !important;
-    transform: none !important;
-    margin-left: auto !important;
-    margin-right: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    border-radius: 50px 0 0 50px !important;
-    background: rgba(var(--abyss-glass-tint), 0.75) !important;
-    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-right: none !important;
-    padding: 3px 6px !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
-}
-
-header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:not(:last-child) {
-    display: flex !important;
-    align-items: center !important;
-    flex-grow: 0 !important;
-    margin: 0 !important;
-    padding: 3px 4px !important;
-    background: rgba(var(--abyss-glass-tint), 0.75) !important;
-    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-radius: 0 !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
-}
-
 html[data-theme="dark"] header.MuiAppBar-root>.MuiToolbar-root:nth-of-type(2) .MuiButtonBase-root {
     -webkit-backdrop-filter: blur(var(--abyss-glass-blur));
     backdrop-filter: blur(var(--abyss-glass-blur));
@@ -503,31 +466,6 @@ header.MuiAppBar-root>.MuiToolbar-root:nth-child(2)>.MuiBox-root>.MuiChip-root {
     transition: background-color 0.25s var(--abyss-ease), color 0.25s var(--abyss-ease), transform 0.25s var(--abyss-ease);
     -webkit-backdrop-filter: blur(var(--abyss-glass-blur));
     backdrop-filter: blur(var(--abyss-glass-blur));
-}
-
-
-header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:last-child {
-    order: initial !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    border-radius: 0 50px 50px 0 !important;
-    background: rgba(var(--abyss-glass-tint), 0.75) !important;
-    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-left: none !important;
-    padding: 3px 8px !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
-}
-
-header.MuiAppBar-root>.MuiToolbar-root:not(:has(> .MuiStack-root:first-of-type))>.MuiBox-root:last-child {
-    border-radius: 50px !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
-    margin-left: auto !important;
 }
 
 body:has(#videoOsdPage:not(.hide)) header.MuiAppBar-root>.MuiToolbar-root>.MuiBox-root:last-child {
@@ -581,28 +519,6 @@ html[data-theme="dark"] header.MuiAppBar-root:has(> .MuiToolbar-root + .MuiToolb
 html[data-theme="dark"] header.MuiAppBar-root.MuiAppBar-positionFixed {
     border: none;
     --Paper-shadow: none !important;
-}
-
-html[data-theme="dark"] header.MuiAppBar-root .MuiStack-root:first-of-type {
-    border-radius: 50px 0 0 50px !important;
-    padding: 3px 6px 3px 14px !important;
-    overflow: auto;
-    scrollbar-width: none;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-right: none !important;
-    -webkit-backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    backdrop-filter: blur(var(--abyss-glass-blur)) !important;
-    background-color: rgba(var(--abyss-glass-tint), 0.75) !important;
-    transition: all 0.45s var(--abyss-ease);
-}
-
-html[data-theme="dark"] header.MuiAppBar-root.MuiPaper-elevation1 .MuiStack-root:first-of-type {
-    border-radius: 50px 0 0 50px !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    border-right: none !important;
-    background-color: rgba(var(--abyss-glass-tint), 0.75) !important;
-    transition: all 0.45s var(--abyss-ease);
 }
 
 html[data-theme="dark"] header.MuiAppBar-root .MuiToolbar-root:first-of-type .MuiButtonBase-root {
@@ -953,26 +869,22 @@ html.abyss-spotlight-visible[data-theme="dark"] .MuiAppBar-root+div[aria-hidden=
 }
 
 /* Backdrop / detail ribbon */
-.layout-tv .itemBackdrop,
-.layout-desktop .itemBackdrop {
+html:not(.sleekfin-details-mounted) .layout-tv .itemBackdrop,
+html:not(.sleekfin-details-mounted) .layout-desktop .itemBackdrop {
     min-height: 520px !important;
     height: var(--sleekfin-details-hero-height, 75vh) !important;
     display: inherit;
 }
 
-.layout-tv .detailRibbon,
-.layout-desktop .detailRibbon {
+html:not(.sleekfin-details-mounted) .layout-tv .detailRibbon,
+html:not(.sleekfin-details-mounted) .layout-desktop .detailRibbon {
     background: rgba(0, 0, 0, .2) !important;
     margin-top: 0;
     padding-top: .5em;
     padding-bottom: .5em;
 }
 
-.itemBackdrop::after {
-    background: rgba(0, 0, 0, .5) !important;
-}
-
-#itemDetailPage .detailLogo {
+html:not(.sleekfin-details-mounted) #itemDetailPage .detailLogo {
     position: static;
     margin-left: 0 !important;
     display: block;
@@ -2106,7 +2018,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
 
 /* 10. ITEM DETAIL PAGE */
 
-.mainDetailButtons {
+html:not(.sleekfin-details-mounted) .mainDetailButtons {
     font-size: 120%;
 }
 
@@ -2149,29 +2061,29 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     margin: .5em .8em;
 }
 
-#itemDetailPage .detailButton {
+html:not(.sleekfin-details-mounted) #itemDetailPage .detailButton {
     padding: 8px !important;
     margin-right: 8px !important;
 }
 
-#itemDetailPage .btnPlay {
+html:not(.sleekfin-details-mounted) #itemDetailPage .btnPlay {
     background: rgba(255, 255, 255, 0.95);
     color: #111;
     max-width: none !important;
 }
 
-#itemDetailPage .btnPlay:hover {
+html:not(.sleekfin-details-mounted) #itemDetailPage .btnPlay:hover {
     background: #fff;
     color: #111 !important;
     transform: scale(1.03);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
 }
 
-#itemDetailPage .btnPlay .detailButton-content {
+html:not(.sleekfin-details-mounted) #itemDetailPage .btnPlay .detailButton-content {
     flex-direction: row !important;
 }
 
-#itemDetailPage .btnReplay {
+html:not(.sleekfin-details-mounted) #itemDetailPage .btnReplay {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -2179,13 +2091,13 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     color: rgba(255, 255, 255, 0.9);
 }
 
-#itemDetailPage .btnReplay:hover {
+html:not(.sleekfin-details-mounted) #itemDetailPage .btnReplay:hover {
     background: rgba(255, 255, 255, 1);
     color: rgba(0, 0, 0, 0.9) !important;
     transform: scale(1.05);
 }
 
-#itemDetailPage:has(.btnReplay.hide) .btnPlayTrailer {
+html:not(.sleekfin-details-mounted) #itemDetailPage:has(.btnReplay.hide) .btnPlayTrailer {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -2193,7 +2105,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     color: rgba(255, 255, 255, 0.9);
 }
 
-#itemDetailPage:has(.btnReplay.hide) #itemDetailPage .btnPlayTrailer:hover {
+html:not(.sleekfin-details-mounted) #itemDetailPage:has(.btnReplay.hide) #itemDetailPage .btnPlayTrailer:hover {
     background: rgba(255, 255, 255, 1);
     color: rgba(0, 0, 0, 0.9) !important;
     transform: scale(1.05);
@@ -2329,7 +2241,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     justify-content: left;
 }
 
-.layout-mobile .itemBackdrop {
+html:not(.sleekfin-details-mounted) .layout-mobile .itemBackdrop {
     position: relative;
     background-size: cover;
     background-position: center 20%;
@@ -2348,7 +2260,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     mask-composite: intersect;
 }
 
-.layout-mobile .detailLogo {
+html:not(.sleekfin-details-mounted) .layout-mobile .detailLogo {
     margin-top: 0;
     margin-bottom: 4vh !important;
     margin-left: 0 !important;
@@ -2422,7 +2334,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
     transform: none !important;
 }
 
-#itemDetailPage .emby-button.show-focus:focus {
+html:not(.sleekfin-details-mounted) #itemDetailPage .emby-button.show-focus:focus {
     transform: scale(1.1) !important;
     padding: 0 .4em;
     margin: .4em;
@@ -2472,8 +2384,8 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
 }
 
 /* Desktop layout & TV*/
-.layout-desktop #itemDetailPage .btnPlay,
-.layout-tv #itemDetailPage .btnPlay {
+html:not(.sleekfin-details-mounted) .layout-desktop #itemDetailPage .btnPlay,
+html:not(.sleekfin-details-mounted) .layout-tv #itemDetailPage .btnPlay {
     margin-right: 12px !important;
     padding: .4em 1.4em .4em 1em !important;
 }
@@ -2635,7 +2547,7 @@ body:has(#videoOsdPage) .skinHeader .MuiTypography-root.MuiTypography-body1 {
 }
 
 @media all and (max-width: 100em) {
-    .mainDetailButtons {
+    html:not(.sleekfin-details-mounted) .mainDetailButtons {
         font-size: 155%;
     }
 

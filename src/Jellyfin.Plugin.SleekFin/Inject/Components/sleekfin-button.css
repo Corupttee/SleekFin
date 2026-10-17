@@ -2,17 +2,22 @@
     align-items: center;
     appearance: none;
     border-radius: 999px !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     cursor: pointer;
-    display: inline-flex;
+    display: inline-flex !important;
+    flex: 0 0 auto;
     font-family: var(--sleekfin-font-family);
     font-weight: 500;
     height: 40px !important;
     justify-content: center;
     letter-spacing: -0.025em;
+    max-width: 100% !important;
     min-width: 0 !important;
-    padding: 0 16px !important;
+    overflow: hidden !important;
+    padding: 0 18px !important;
     transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+    white-space: nowrap !important;
+    width: auto !important;
 }
 
 .sleekfin-button > .sleekfin-icon,
@@ -22,9 +27,12 @@
 
 .sleekfin-button-content {
     align-items: center;
-    display: flex;
+    display: inline-flex !important;
     font: inherit;
     gap: inherit;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .sleekfin-button-content > :not(.sleekfin-icon):not(.sleekfin-button-label) {
@@ -36,8 +44,9 @@
     border: 0 !important;
     color: #05070a !important;
     gap: 8px;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 15px !important;
+    line-height: 22px !important;
+    padding-inline: 20px !important;
 }
 
 .sleekfin-button-primary .sleekfin-icon {
@@ -48,8 +57,9 @@
 .sleekfin-button-control {
     color: var(--sleekfin-text) !important;
     gap: 8px;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 13px !important;
+    line-height: 18px !important;
+    padding-inline: 18px !important;
 }
 
 .sleekfin-button-control .sleekfin-icon {

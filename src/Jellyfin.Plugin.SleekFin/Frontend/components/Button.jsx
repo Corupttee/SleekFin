@@ -24,7 +24,17 @@ export function IconButton({ icon, label, raised, strokeWidth, class: classValue
   );
 }
 
-function setNativeContent(parent, iconName, label) {
+function stripTextNodes(container, stashed) {
+  Array.from(container.childNodes).forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE && node.nodeValue && node.nodeValue.trim()) {
+      stashed.push({ node, text: node.nodeValue });
+      node.nodeValue = '';
+    }
+  });
+}
+
+function setNativeContent(parent, iconName, label, stashed) {
+  stripTextNodes(parent, stashed);
   setIcon(parent, iconName);
   let labelElement = parent.querySelector(':scope > .sleekfin-button-label');
   if (!labelElement) {
@@ -38,30 +48,39 @@ function setNativeContent(parent, iconName, label) {
 }
 
 export function restoreNativeButton(element) {
-  const content = decorations.get(element);
-  if (!content) return;
+  const record = decorations.get(element);
+  if (!record) return;
+  const { content, stashed } = record;
 
   element.classList.remove('sleekfin-button', 'sleekfin-button-primary', 'sleekfin-button-control', 'sleekfin-control-3d');
   content.classList.remove('sleekfin-button-content');
   content.querySelector(':scope > .sleekfin-icon')?.remove();
   content.querySelector(':scope > .sleekfin-button-label')?.remove();
+  stashed.forEach((entry) => {
+    entry.node.nodeValue = entry.text;
+  });
   decorations.delete(element);
 }
 
 export function decorateNativeButton(element, options) {
   const settings = options || {};
   const content = settings.content || element;
-  const current = decorations.get(element);
-  if (current && current !== content) {
+  let record = decorations.get(element);
+  if (record && record.content !== content) {
     restoreNativeButton(element);
+    record = null;
   }
-  if (!decorations.has(element)) {
-    decorations.set(element, content);
+  if (!record) {
+    record = { content, stashed: [] };
+    decorations.set(element, record);
   }
 
+  if (content !== element) {
+    stripTextNodes(element, record.stashed);
+  }
   element.classList.remove('sleekfin-button-primary', 'sleekfin-button-control');
   element.classList.add('sleekfin-button', `sleekfin-button-${settings.variant}`);
   element.classList.toggle('sleekfin-control-3d', settings.variant === 'control');
   content.classList.add('sleekfin-button-content');
-  setNativeContent(content, settings.icon, settings.label);
+  setNativeContent(content, settings.icon, settings.label, record.stashed);
 }

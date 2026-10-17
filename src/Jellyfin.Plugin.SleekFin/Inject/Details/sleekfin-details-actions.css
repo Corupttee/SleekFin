@@ -114,10 +114,22 @@
 }
 
 .sleekfin-details-stack > .mainDetailButtons > .detailButton:not(.sleekfin-button) {
-    border-radius: 50%;
+    align-items: center;
+    border-radius: 50% !important;
     flex: 0 0 auto;
-    height: 40px;
-    width: 40px;
+    font-size: 0 !important;
+    height: 40px !important;
+    justify-content: center;
+    max-width: 40px !important;
+    min-width: 40px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    width: 40px !important;
+}
+
+.sleekfin-details-stack > .mainDetailButtons > .detailButton:not(.sleekfin-button) .material-icons {
+    font-size: 20px !important;
+    margin: 0 !important;
 }
 
 .sleekfin-details-stack > .mainDetailButtons > .detailButton:not(.sleekfin-button) :is(.detailButton-text, .detailButton-icon-text, span:not(.material-icons):not(.sleekfin-icon)) {
@@ -125,13 +137,21 @@
 }
 
 .sleekfin-details-stack > .mainDetailButtons .detailButton-content {
+    align-items: center;
     flex-direction: row !important;
     height: auto;
+    justify-content: center;
 }
 
-.sleekfin-details-stack > .mainDetailButtons .sleekfin-button {
-    max-width: 100%;
-    box-sizing: border-box;
+html.sleekfin-details-mounted #itemDetailPage .sleekfin-details-stack > .mainDetailButtons > .detailButton.sleekfin-button {
+    box-sizing: border-box !important;
+    height: 40px !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    padding: 0 20px !important;
+    width: auto !important;
 }
 
 .sleekfin-details-stack > .mainDetailButtons .sleekfin-button .detailButton-content .material-icons {
@@ -158,9 +178,20 @@
         right: 56px;
     }
 
+    html.sleekfin-details-mounted #itemDetailPage .sleekfin-details-stack > .mainDetailButtons > .detailButton.sleekfin-button {
+        height: 44px !important;
+        padding: 0 24px !important;
+    }
+
+    html.sleekfin-details-mounted #itemDetailPage .sleekfin-details-stack > .mainDetailButtons > .detailButton.sleekfin-button.sleekfin-button-primary {
+        padding: 0 28px !important;
+    }
+
     .sleekfin-details-stack > .mainDetailButtons > :is(.detailButton:not(.sleekfin-button), .sleekfin-details-track-settings),
     .sleekfin-details-stack .sleekfin-details-enhanced-action:not(.arr-dropdown) {
-        height: 44px;
-        width: 44px;
+        height: 44px !important;
+        max-width: 44px !important;
+        min-width: 44px !important;
+        width: 44px !important;
     }
 }
