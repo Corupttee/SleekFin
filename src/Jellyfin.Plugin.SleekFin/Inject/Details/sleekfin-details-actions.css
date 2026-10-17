@@ -2,10 +2,10 @@
     align-items: center;
     display: flex !important;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: flex-start;
     margin: 18px 0 0 !important;
-    padding: 0 0 52px !important;
+    padding: 0 !important;
     position: relative;
 }
 
@@ -97,20 +97,7 @@
 }
 
 .sleekfin-details-stack > .mainDetailButtons > :is(.btnPlaystate, .sleekfin-details-track-settings, .btnMoreCommands) {
-    bottom: 0;
-    position: absolute;
-}
-
-.sleekfin-details-stack > .mainDetailButtons > .btnPlaystate {
-    right: 104px;
-}
-
-.sleekfin-details-stack > .mainDetailButtons > .sleekfin-details-track-settings {
-    right: 52px;
-}
-
-.sleekfin-details-stack > .mainDetailButtons > .btnMoreCommands {
-    right: 0;
+    order: 7;
 }
 
 .sleekfin-details-stack > .mainDetailButtons > .detailButton:not(.sleekfin-button) {
@@ -167,7 +154,13 @@ html.sleekfin-details-mounted #itemDetailPage .sleekfin-details-stack > .mainDet
 
 @media (min-width: 768px) {
     .sleekfin-details-stack > .mainDetailButtons {
+        gap: 12px;
         padding: 0 168px 0 0 !important;
+    }
+
+    .sleekfin-details-stack > .mainDetailButtons > :is(.btnPlaystate, .sleekfin-details-track-settings, .btnMoreCommands) {
+        bottom: 0;
+        position: absolute;
     }
 
     .sleekfin-details-stack > .mainDetailButtons > .btnPlaystate {
@@ -176,6 +169,10 @@ html.sleekfin-details-mounted #itemDetailPage .sleekfin-details-stack > .mainDet
 
     .sleekfin-details-stack > .mainDetailButtons > .sleekfin-details-track-settings {
         right: 56px;
+    }
+
+    .sleekfin-details-stack > .mainDetailButtons > .btnMoreCommands {
+        right: 0;
     }
 
     html.sleekfin-details-mounted #itemDetailPage .sleekfin-details-stack > .mainDetailButtons > .detailButton.sleekfin-button {

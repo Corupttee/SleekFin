@@ -59,16 +59,6 @@ html.sleekfin-header-mounted [data-sleekfin-header] {
     z-index: 1100 !important;
 }
 
-html.layout-tv.sleekfin-header-mounted [data-sleekfin-header="legacy"],
-html.sleekfin-header-mounted body.layout-tv [data-sleekfin-header="legacy"] {
-    position: relative !important;
-}
-
-html.layout-tv.sleekfin-header-mounted .sleekfin-header-fallback-brand,
-html.sleekfin-header-mounted body.layout-tv .sleekfin-header-fallback-brand {
-    position: absolute !important;
-}
-
 @media (min-width: 768px) {
     html.sleekfin-header-mounted:not(.sleekfin-main-ui) {
         --sleekfin-page-gutter: 48px;
@@ -443,5 +433,9 @@ html.sleekfin-header-mounted [data-sleekfin-header-proxy="legacy"] {
         top: auto;
         transform: translateX(-50%);
         z-index: 1103;
+    }
+
+    html.sleekfin-header-mounted:not(.layout-tv) body:not(.layout-tv) :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecommendedPage, #itemDetailPage .detailPageSecondaryContainer) {
+        padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
     }
 }

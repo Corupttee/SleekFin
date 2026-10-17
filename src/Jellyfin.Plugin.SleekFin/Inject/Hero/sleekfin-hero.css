@@ -1,4 +1,4 @@
-#indexPage.homePage.libraryPage:has(.sleekfin-hero),
+:is(#indexPage.homePage.libraryPage, #moviesPage, #tvshowsPage, #tvRecommendedPage):has(.sleekfin-hero),
 html:is(.sleekfin-hero-boot-loading, .sleekfin-hero-loading) #indexPage.homePage.libraryPage {
     background: var(--sleekfin-background);
     /* Jellyfin's wide absolute-tab rule might load after Modern home override. */
@@ -14,28 +14,28 @@ html.sleekfin-hero-mounted #slides-container {
     margin-top: 0;
 }
 
-/* Netflix-style library billboard: rounded card with page gutters. */
+/* Library billboard: full-bleed flush to the left and right edges like Home hero. */
 .sleekfin-hero--library {
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-    margin: 12px var(--sleekfin-page-gutter) 8px;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 0 8px !important;
     min-height: min(560px, 72vh);
-    width: auto;
+    width: 100% !important;
 }
 
 .sleekfin-hero--library .sleekfin-hero-slide {
-    border-radius: 20px;
+    border-radius: 0 !important;
 }
 
 @media (max-width: 767px) {
     .sleekfin-hero--library {
-        border-radius: 16px;
-        margin: 8px 12px 4px;
-        min-height: 52vh;
+        border-radius: 0 !important;
+        margin: 0 0 4px !important;
+        min-height: 58vh;
     }
 }
 
-/* TV focus must stay visible inside rounded billboard. */
+/* TV focus must stay visible inside hero. */
 .layout-tv .sleekfin-hero--library,
 .layout-tv .sleekfin-hero {
     overflow: hidden;

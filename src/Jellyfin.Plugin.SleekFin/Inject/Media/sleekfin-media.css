@@ -12,12 +12,12 @@ html.sleekfin-media-mounted :is(#indexPage, #moviesPage, #tvshowsPage, #tvRecomm
     padding-inline-end: var(--sleekfin-page-gutter) !important;
 }
 
-html.sleekfin-media-mounted.sleekfin-header-mounted :is(#moviesPage, #tvshowsPage, #tvRecommendedPage) {
+html.sleekfin-media-mounted.sleekfin-header-mounted :is(#moviesPage, #tvshowsPage, #tvRecommendedPage):not(:has(.sleekfin-hero)) {
     padding-top: 72px !important;
 }
 
 @media (max-width: 599px) {
-    html.sleekfin-media-mounted.sleekfin-header-mounted :is(#moviesPage, #tvshowsPage, #tvRecommendedPage) {
+    html.sleekfin-media-mounted.sleekfin-header-mounted :is(#moviesPage, #tvshowsPage, #tvRecommendedPage):not(:has(.sleekfin-hero)) {
         padding-top: 112px !important;
     }
 }
@@ -29,9 +29,16 @@ html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolb
     display: flex;
     font-family: var(--sleekfin-font-family);
     gap: 12px;
+    max-width: 100vw;
     min-height: 48px;
+    overflow-x: auto;
     padding-inline: var(--sleekfin-page-gutter) !important;
     pointer-events: auto;
+    scrollbar-width: none;
+}
+
+html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root::-webkit-scrollbar {
+    display: none;
 }
 
 html.sleekfin-media-mounted header.MuiAppBar-root > .MuiToolbar-root + .MuiToolbar-root > button:first-child {
@@ -505,8 +512,13 @@ html.sleekfin-media-mounted .emby-tab-button-active:hover {
 }
 
 
-/* Library grids keep Netflix spacing under the billboard. */
+/* Library grids keep Netflix spacing under the full-bleed billboard. */
 html.sleekfin-media-mounted :is(#moviesPage, #tvshowsPage, #tvRecommendedPage) .pageContent {
+    padding-inline: 0 !important;
+}
+
+html.sleekfin-media-mounted :is(#moviesPage, #tvshowsPage, #tvRecommendedPage) .pageContent > :not(.sleekfin-hero) {
+    box-sizing: border-box;
     padding-inline: var(--sleekfin-page-gutter);
 }
 

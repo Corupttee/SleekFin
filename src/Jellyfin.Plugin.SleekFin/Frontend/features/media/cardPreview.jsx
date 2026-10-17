@@ -94,8 +94,7 @@ export function isTvLayout() {
   return (
     document.documentElement.classList.contains('layout-tv') ||
     document.body.classList.contains('layout-tv') ||
-    /tv|tizen|webos|viera|smarttv|googletv|appletv/i.test(navigator.userAgent) ||
-    window.location.hash.toLowerCase().includes('tv')
+    /tv|tizen|webos|viera|smarttv|googletv|appletv/i.test(navigator.userAgent)
   );
 }
 
@@ -741,21 +740,13 @@ export function createCardPreviewFeature(cache) {
     if (!isTvLayout()) return;
     const card = event.target.closest ? event.target.closest('.card[data-id]') : null;
     if (!card || !isPreviewableCard(card)) return;
-    const id = card.dataset.id;
-    if (!id) return;
     window.clearTimeout(tvFocusTimer);
     window.clearTimeout(hideTimer);
-    tvFocusedId = id;
-    activeCard = card;
-    activeId = id;
     try {
       card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     } catch {
       // scrollIntoView may be unavailable on older TV browsers.
     }
-    tvFocusTimer = window.setTimeout(() => {
-      if (tvFocusedId === id) showTvPopover(card, id);
-    }, 320);
   }
 
   function onCardBlur(event) {

@@ -1,14 +1,14 @@
 {
   "category": "General",
-  "changelog": "publish 13.1.0.0",
+  "changelog": "fix Movies/Series library hero left alignment, TV header & focus UI, and mobile responsive UI",
   "description": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "guid": "da36c4ef-1d10-4169-8a68-26b194d5301a",
   "name": "AbyssFin",
   "overview": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "owner": "Corupttee",
   "targetAbi": "10.11.0.0",
-  "timestamp": "2026-10-17T21:32:17.0000000Z",
-  "version": "13.1.0.0",
+  "timestamp": "2026-10-17T21:55:00.0000000Z",
+  "version": "13.2.0.0",
   "status": "Active",
   "autoUpdate": true,
   "assemblies": [

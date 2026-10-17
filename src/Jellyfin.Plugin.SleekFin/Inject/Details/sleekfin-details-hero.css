@@ -408,21 +408,28 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
 }
 
 @media (max-width: 767px) {
+    html.sleekfin-details-mounted #itemDetailPage #itemBackdrop,
+    html.sleekfin-details-mounted #itemDetailPage .itemBackdrop,
+    html.sleekfin-details-mounted .layout-mobile .itemBackdrop {
+        min-height: 480px !important;
+    }
+
     .sleekfin-details-hero {
-        padding-bottom: 48px;
+        padding-bottom: 36px;
+        padding-top: calc(var(--sleekfin-header-height, 64px) + 16px);
     }
 
     .sleekfin-details-title {
-        min-height: 84px;
-        max-width: 300px;
+        min-height: 68px;
+        max-width: min(280px, 78vw);
     }
 
     .sleekfin-details-title .detailLogo {
-        height: 84px !important;
+        height: 72px !important;
     }
 
     .sleekfin-details-title :is(h1, .parentName) {
-        font-size: 36px;
+        font-size: clamp(26px, 7.5vw, 34px);
     }
 
     .sleekfin-details-facts,
@@ -432,7 +439,7 @@ html.sleekfin-details-mounted.sleekfin-header-mounted [data-sleekfin-header-menu
     }
 
     .sleekfin-details-child-title .itemName {
-        font-size: 21px;
-        line-height: 27px;
+        font-size: 20px;
+        line-height: 26px;
     }
 }

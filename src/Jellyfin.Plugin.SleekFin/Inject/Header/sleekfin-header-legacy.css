@@ -54,11 +54,23 @@ html.sleekfin-header-mounted [data-sleekfin-legacy-cluster] .headerRight::before
     margin: 0 6px 0 4px;
 }
 
-html.sleekfin-header-mounted [data-sleekfin-legacy-cluster] [data-sleekfin-header-all-proxied="true"] {
+html.sleekfin-header-mounted [data-sleekfin-header="legacy"] [data-sleekfin-header-all-proxied="true"],
+html.sleekfin-header-mounted [data-sleekfin-header="legacy"] [data-sleekfin-header-all-proxied="true"] .emby-tabs-slider {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
     min-width: 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     padding: 0 !important;
+    pointer-events: none !important;
     width: 0 !important;
+}
+
+html.sleekfin-header-mounted [data-sleekfin-legacy-cluster] :is(.headerClock, .headerSelectedPlayer) {
+    display: none !important;
 }
 
 html.sleekfin-header-mounted [data-sleekfin-legacy-cluster] .headerRight[data-sleekfin-header-all-proxied="true"]::before {
@@ -131,6 +143,7 @@ html.sleekfin-header-mounted [data-sleekfin-legacy-top] {
     min-height: var(--sleekfin-header-height) !important;
     padding: 0 var(--sleekfin-page-gutter) !important;
     pointer-events: auto;
+    width: 100% !important;
 }
 
 html.sleekfin-header-mounted [data-sleekfin-legacy-left] {

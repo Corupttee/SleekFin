@@ -221,7 +221,7 @@ input[type="radio"]:checked {
 
 /* 4. TYPOGRAPHY */
 
-.headerTabs.sectionTabs {
+html:not(.sleekfin-header-mounted) .headerTabs.sectionTabs {
     text-size-adjust: 110%;
     font-size: 110%;
     padding-top: 8px;
@@ -363,11 +363,11 @@ input[type="radio"]:checked {
 /* 5. LAYOUT & STRUCTURE */
 
 /* Header */
-.headerTop {
+html:not(.sleekfin-header-mounted) .headerTop {
     padding: 2em 0 !important;
 }
 
-.skinHeader {
+html:not(.sleekfin-header-mounted) .skinHeader {
     background-color: transparent;
     display: flex !important;
     justify-items: center !important;
@@ -391,8 +391,8 @@ input[type="radio"]:checked {
     z-index: 1;
 }
 
-.headerLeft,
-.headerRight {
+html:not(.sleekfin-header-mounted) .headerLeft,
+html:not(.sleekfin-header-mounted) .headerRight {
     padding: 0 31px;
     align-items: center;
 }
@@ -813,7 +813,7 @@ html.abyss-spotlight-visible[data-theme="dark"] .MuiAppBar-root+div[aria-hidden=
     border-radius: 50px;
 }
 
-.emby-tabs-slider {
+html:not(.sleekfin-header-mounted) .emby-tabs-slider {
     border-radius: 50px;
     padding: 5px 2.5px;
     overflow: auto;
@@ -2150,38 +2150,38 @@ html:not(.sleekfin-details-mounted) #itemDetailPage:has(.btnReplay.hide) #itemDe
 
 /* 12. CAST THUMBNAILS (responsive sizing) */
 
-.layout-desktop #castContent .card.overflowPortraitCard,
-.layout-desktop #guestCastContent .card.overflowPortraitCard {
+html:not(.sleekfin-details-mounted) .layout-desktop #castContent .card.overflowPortraitCard,
+html:not(.sleekfin-details-mounted) .layout-desktop #guestCastContent .card.overflowPortraitCard {
     width: 10vw !important;
     font-size: 90% !important;
 }
 
-.layout-desktop #castContent .cardScalable,
-.layout-desktop #guestCastContent .cardScalable {
+html:not(.sleekfin-details-mounted) .layout-desktop #castContent .cardScalable,
+html:not(.sleekfin-details-mounted) .layout-desktop #guestCastContent .cardScalable {
     width: calc(10vw - 0.6em) !important;
     height: calc(14vw - 0.6em) !important;
 }
 
-.layout-tablet #castContent .card.overflowPortraitCard,
-.layout-tablet #guestCastContent .card.overflowPortraitCard {
+html:not(.sleekfin-details-mounted) .layout-tablet #castContent .card.overflowPortraitCard,
+html:not(.sleekfin-details-mounted) .layout-tablet #guestCastContent .card.overflowPortraitCard {
     width: 17vw !important;
     font-size: 90% !important;
 }
 
-.layout-tablet #castContent .cardScalable,
-.layout-tablet #guestCastContent .cardScalable {
+html:not(.sleekfin-details-mounted) .layout-tablet #castContent .cardScalable,
+html:not(.sleekfin-details-mounted) .layout-tablet #guestCastContent .cardScalable {
     width: calc(17vw - 0.6em) !important;
     height: calc(12vw - 0.6em) !important;
 }
 
-.layout-mobile #castContent .card.overflowPortraitCard,
-.layout-mobile #guestCastContent .card.overflowPortraitCard {
+html:not(.sleekfin-details-mounted) .layout-mobile #castContent .card.overflowPortraitCard,
+html:not(.sleekfin-details-mounted) .layout-mobile #guestCastContent .card.overflowPortraitCard {
     width: 35vw !important;
     font-size: 90% !important;
 }
 
-.layout-mobile #castContent .cardScalable,
-.layout-mobile #guestCastContent .cardScalable {
+html:not(.sleekfin-details-mounted) .layout-mobile #castContent .cardScalable,
+html:not(.sleekfin-details-mounted) .layout-mobile #guestCastContent .cardScalable {
     width: calc(35vw - 0.6em) !important;
     height: calc(35vw - 0.6em) !important;
 }
@@ -2200,14 +2200,14 @@ html:not(.sleekfin-details-mounted) #itemDetailPage:has(.btnReplay.hide) #itemDe
 
 @media (orientation: landscape) and (max-height: 500px) {
 
-    .layout-mobile #castContent .card.overflowPortraitCard,
-    .layout-mobile #guestCastContent .card.overflowPortraitCard {
+    html:not(.sleekfin-details-mounted) .layout-mobile #castContent .card.overflowPortraitCard,
+    html:not(.sleekfin-details-mounted) .layout-mobile #guestCastContent .card.overflowPortraitCard {
         width: 31.2vw !important;
         font-size: 90% !important;
     }
 
-    .layout-mobile #castContent .cardScalable,
-    .layout-mobile #guestCastContent .cardScalable {
+    html:not(.sleekfin-details-mounted) .layout-mobile #castContent .cardScalable,
+    html:not(.sleekfin-details-mounted) .layout-mobile #guestCastContent .cardScalable {
         width: calc(31.2vw - 0.6em) !important;
         height: calc(31.2vw - 0.6em) !important;
     }
@@ -2289,8 +2289,8 @@ html:not(.sleekfin-details-mounted) .layout-mobile .detailLogo {
 
 /* TV Layout */
 
-.card:focus .cardBox.visualCardBox,
-.card:focus .cardBox:not(.visualCardBox) .cardScalable {
+html:not(.sleekfin-media-mounted) .card:focus .cardBox.visualCardBox,
+html:not(.sleekfin-media-mounted) .card:focus .cardBox:not(.visualCardBox) .cardScalable {
     border-radius: 24px !important;
     border: 0.3em solid rgb(var(--abyss-accent)) !important;
     transition: all 0.5s !important;
@@ -2301,7 +2301,7 @@ html:not(.sleekfin-details-mounted) .layout-mobile .detailLogo {
     font-size: revert;
 }
 
-.layout-tv .emby-tab-button {
+html:not(.sleekfin-header-mounted) .layout-tv .emby-tab-button {
     padding: 0.3em 1.2em;
     margin: 4px;
 }
@@ -2322,7 +2322,7 @@ html:not(.sleekfin-details-mounted) .layout-mobile .detailLogo {
     color: #121212 !important;
 }
 
-.headerButton.show-focus:focus,
+html:not(.sleekfin-header-mounted) .headerButton.show-focus:focus,
 .raised.button-submit.emby-button.show-focus:focus {
     transform: scale(1.02) !important;
     transition: transform 0.3s !important;
@@ -2402,13 +2402,13 @@ html:not(.sleekfin-details-mounted) .layout-tv #itemDetailPage .btnPlay {
 
 
 
-.withSectionTabs .headerTop {
+html:not(.sleekfin-header-mounted) .withSectionTabs .headerTop {
     width: 100% !important;
     align-self: center !important;
 }
 
 @media (max-width: 100em) {
-    .withSectionTabs .headerTop {
+    html:not(.sleekfin-header-mounted) .withSectionTabs .headerTop {
         padding-bottom: 0;
     }
 }
@@ -2426,7 +2426,7 @@ html:not(.sleekfin-details-mounted) .layout-tv #itemDetailPage .btnPlay {
         background-color: rgba(0, 0, 0, 0.7);
     }
 
-    .headerTabs.sectionTabs {
+    html:not(.sleekfin-header-mounted) .headerTabs.sectionTabs {
         margin-top: -4.9em !important;
     }
 }
@@ -2477,8 +2477,8 @@ html:not(.sleekfin-details-mounted) .layout-tv #itemDetailPage .btnPlay {
         font-weight: 500;
     }
 
-    .headerLeft,
-    .headerRight {
+    html:not(.sleekfin-header-mounted) .headerLeft,
+    html:not(.sleekfin-header-mounted) .headerRight {
         padding: 0 12px;
     }
 
@@ -2487,7 +2487,7 @@ html:not(.sleekfin-details-mounted) .layout-tv #itemDetailPage .btnPlay {
         border-radius: 12px !important;
     }
 
-    .emby-tab-button {
+    html:not(.sleekfin-header-mounted) .emby-tab-button {
         padding: 0.4em 1.2em;
     }
 
@@ -2526,7 +2526,7 @@ html:not(.sleekfin-details-mounted) .layout-tv #itemDetailPage .btnPlay {
         border-radius: 20px !important;
     }
 
-    body:has(#indexPage.homePage:not(.hide)) .headerTabs.sectionTabs {
+    html:not(.sleekfin-header-mounted) body:has(#indexPage.homePage:not(.hide)) .headerTabs.sectionTabs {
         margin-top: -4.9em !important;
     }
 }

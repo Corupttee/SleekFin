@@ -182,7 +182,8 @@ function proxyContentOverflows(mount) {
   const proxyBounds = mount.proxy.getBoundingClientRect();
   let left = Math.max(0, proxyBounds.left);
   let right = Math.min(window.innerWidth, proxyBounds.right);
-  let parent = mount.proxy.parentElement;
+  const isFixed = window.getComputedStyle(mount.proxy).position === 'fixed';
+  let parent = isFixed ? null : mount.proxy.parentElement;
   while (parent) {
     if (/^(?:auto|clip|hidden|scroll)$/.test(window.getComputedStyle(parent).overflowX)) {
       const parentBounds = parent.getBoundingClientRect();
@@ -192,10 +193,14 @@ function proxyContentOverflows(mount) {
     parent = parent.parentElement;
   }
   const children = [...mount.proxyEntries.map((entry) => entry.element), mount.overflowToggle].filter(
-    (element) => element.getAttribute('data-sleekfin-header-overflowed') !== 'true' && element.getAttribute('data-sleekfin-header-overflow-hidden') !== 'true',
+    (element) =>
+      element.style.display !== 'none' &&
+      element.getAttribute('data-sleekfin-header-overflowed') !== 'true' &&
+      element.getAttribute('data-sleekfin-header-overflow-hidden') !== 'true',
   );
   return mount.proxy.scrollWidth > mount.proxy.clientWidth + 1 || children.some((element) => {
     const bounds = element.getBoundingClientRect();
+    if (bounds.width <= 0 && bounds.height <= 0) return false;
     return bounds.left < left - 1 || bounds.right > right + 1;
   });
 }
@@ -239,7 +244,10 @@ function markEmptySegments(mount) {
     const controls = Array.from(segment.querySelectorAll('button, a[href]')).filter(
       (source) =>
         !source.closest('[data-sleekfin-header-proxy]') &&
-        !source.matches('[data-sleekfin-header-brand], .je-header-more-toggle, .mainDrawerButton'),
+        !source.matches('[data-sleekfin-header-brand], .je-header-more-toggle, .mainDrawerButton') &&
+        !source.hidden &&
+        !source.classList.contains('hide') &&
+        source.style.display !== 'none',
     );
     mark(mount, segment, 'data-sleekfin-header-all-proxied', controls.every((source) => sources.has(source)) ? 'true' : 'false');
   };
