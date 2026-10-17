@@ -6,7 +6,7 @@ These instructions apply to the entire repository. Treat `references/` as read-o
 
 1. Implement exactly what the user requested. Do not add adjacent features, broad cleanup, dependency upgrades, redesigns, or formatting sweeps.
 2. Keep SleekFin specific to Jellyfin 12.0, .NET 10, and the Jellyfin Web `v12.0` contract unless the user explicitly requests a compatibility change.
-3. Keep production code concise. Do not add abstractions, helpers, state, compatibility branches, dependencies, support files, or tests unless they are necessary for the requested behavior.ff
+3. Keep production code concise. Do not add abstractions, helpers, state, compatibility branches, dependencies, support files, or tests unless they are necessary for the requested behavior.
 4. Inspect the relevant source, history, and surrounding conventions before editing. Do not infer behavior from filenames or issue labels alone.
 5. Preserve unrelated user changes. Never overwrite, discard, stage, or commit work that is outside the current task.
 6. Distinguish implemented, build-verified, manually tested, and live Jellyfin-verified outcomes. Never present one as another.
