@@ -7,8 +7,8 @@
   "overview": "The ultimate Jellyfin Web revamp, with new elements, styles, plus compatible with the most popular plugins.",
   "owner": "Corupttee",
   "targetAbi": "10.11.0.0",
-  "timestamp": "2026-10-17T21:22:28.0000000Z",
-  "version": "103.0.0.0",
+  "timestamp": "2026-10-17T21:30:00.0000000Z",
+  "version": "13.1.0.0",
   "status": "Active",
   "autoUpdate": true,
   "assemblies": [
